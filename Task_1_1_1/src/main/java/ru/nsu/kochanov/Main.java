@@ -1,11 +1,17 @@
 package ru.nsu.kochanov;
 
-import java.util.Scanner;
-
+/**
+ * Task_1_1_1 HeapSort
+ */
 public class Main {
-
+    /**
+     * Sorting array elements in ascending order. First, the unordered sequence becomes a heap.
+     * Next, sorting is performed. The first (maximum) element is exchanged with the last element, so the finished
+     * sequence is formed at the tail of the array.
+     * @param arr The array of integers to sort.
+     */
     // Метод сортировки
-    public void sort(int[] arr) {
+    static void sort(int[] arr) {
         int n = arr.length;
 
         // Построение кучи (Heapify)
@@ -25,8 +31,14 @@ public class Main {
         }
     }
 
+    /**
+     * The largest element of parent(arr[i]) or children(arr[2*i+1], arr[2*i+2]) appears at the root of the current subtree.
+     * @param arr The array of integers.
+     * @param n The lenght of array.
+     * @param i the index of element to be heapify.
+     */
     // Метод для приведения поддерева с корнем в узле i к куче
-    void heapify(int[] arr, int n, int i) {
+   static void heapify(int[] arr, int n, int i) {
         int largest = i;
         int left = 2 * i + 1;
         int right = 2 * i + 2;
@@ -50,40 +62,5 @@ public class Main {
             // Рекурсивно heapify поддерево
             heapify(arr, n, largest);
         }
-    }
-
-    // Метод для вывода массива
-    static void printArray(int[] arr) {
-        int n = arr.length;
-        for (int i = 0; i < n; i++) {
-            System.out.print(arr[i] + " ");
-        }
-        System.out.println();
-    }
-
-    // Основная программа
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        // Ввод размера массива
-        System.out.print("Введите размер массива: ");
-        int n = scanner.nextInt();
-        int[] arr = new int[n];
-
-        // Ввод элементов массива
-        System.out.println("Введите элементы массива:");
-        for (int i = 0; i < n; i++) {
-            arr[i] = scanner.nextInt();
-        }
-
-        // Создание объекта класса Main и вызов сортировки
-        Main ob = new Main();
-        ob.sort(arr);
-
-        // Вывод отсортированного массива
-        System.out.println("Отсортированный массив:");
-        printArray(arr);
-
-        scanner.close();  // Закрытие сканера
     }
 }
