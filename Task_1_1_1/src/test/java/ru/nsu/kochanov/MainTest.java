@@ -1,11 +1,8 @@
 package ru.nsu.kochanov;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.fail;
-import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
-
 
 
 class MainTest {
@@ -75,8 +72,8 @@ class MainTest {
 
     @Test
     void sampleTest4() {
-        int[] inputArray4 = {1,2,3,4,5};
-        int[] expectedArray4 = {1,2,3,4,5};
+        int[] inputArray4 = {1, 2, 3, 4, 5};
+        int[] expectedArray4 = {1, 2, 3, 4, 5};
 
         // Создаем объект Main
         Main ob = new Main();

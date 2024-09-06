@@ -1,13 +1,15 @@
 package ru.nsu.kochanov;
 
 /**
- * Task_1_1_1 HeapSort
+ * Task_1_1_1 HeapSort.
  */
 public class Main {
     /**
      * Sorting array elements in ascending order. First, the unordered sequence becomes a heap.
-     * Next, sorting is performed. The first (maximum) element is exchanged with the last element, so the finished
+     * Next, sorting is performed. The first (maximum) element is exchanged with the last element,
+     * so the finished.
      * sequence is formed at the tail of the array.
+     *
      * @param arr The array of integers to sort.
      */
     // Метод сортировки
@@ -32,9 +34,13 @@ public class Main {
     }
 
     /**
-     * The largest element of parent(arr[i]) or children(arr[2*i+1], arr[2*i+2]) appears at the root of the current subtree.
+     * The largest element of parent(arr[i]) or children(arr[2*i+1], arr[2*i+2]),
+     * appears at the root of the current subtree.
+     *
      * @param arr The array of integers.
+     *
      * @param n The lenght of array.
+     *          
      * @param i the index of element to be heapify.
      */
     // Метод для приведения поддерева с корнем в узле i к куче
