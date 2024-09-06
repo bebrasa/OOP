@@ -19,4 +19,11 @@ class MainTest {
         // Проверяем, что массив отсортирован правильно
         assertArrayEquals(expectedArray, inputArray);
     }
+    void SampleTest1(){
+        int[] inputArray1 = {-123, 0, -32,29,2,345,-999,-1000,1000};
+        int[] expectedArray1 = {-1000,-999,-123,-32,0,2,29,345,1000};
+        Main ob = new Main();
+        ob.sort(inputArray1);
+        assertArrayEquals(expectedArray1, inputArray1);
+    }
 }
