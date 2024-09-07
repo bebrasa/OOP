@@ -1,7 +1,7 @@
 package ru.nsu.kochanov;
 
 /**
- * Task_1_1_1 HeapSort.
+ * Task_1_1_1 HeapSort.`
  */
 public class Main {
     /**
@@ -40,7 +40,7 @@ public class Main {
      * @param arr The array of integers.
      *
      * @param n The lenght of array.
-     *          
+     *
      * @param i the index of element to be heapify.
      */
     // Метод для приведения поддерева с корнем в узле i к куче
