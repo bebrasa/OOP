@@ -147,4 +147,12 @@ public class HeapSortTest {
         }
     }
 
+    @Test
+    void TestMainMethod(){
+
+        String[] args = {};
+        
+        HeapSort.main(args);
+    }
+
 }
