@@ -3,15 +3,16 @@ package ru.nsu.kochanov;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.Test;
-
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Random;
+import org.junit.jupiter.api.Test;
 
 
 public class HeapSortTest {
-
+    /**
+     * This tests can proofe that my code is working.
+     */
     @Test
     void sampleTest() {
         // Исходный массив
@@ -89,7 +90,9 @@ public class HeapSortTest {
         // Проверяем, что массив отсортирован правильно
         assertArrayEquals(expectedArray4, inputArray4);
     }
+
     double logn = 0;
+
     private int[] generateRandomArray(int size) {
         Random random = new Random();
         int[] array = new int[size];
@@ -127,9 +130,10 @@ public class HeapSortTest {
             Instant end = Instant.now();
             Duration timeElapsed = Duration.between(start, end);
 
-            logn = ((arraySize * Math.log(arraySize)) / Math.log(2)) / Math.pow(10,5);
+            logn = ((arraySize * Math.log(arraySize)) / Math.log(2)) / Math.pow(10, 5);
             // Выводим время сортировки и проверяем, что массив отсортирован
-            System.out.println("Array size: " + arraySize + ", Time elapsed: " + timeElapsed.toMillis() + " ms " + logn + " NLn(N)");
+            System.out.println("Array size: " + arraySize + ", Time elapsed: " +
+                    timeElapsed.toMillis() + " ms " + logn + " NLn(N)");
 
             // Проверяем, что массив отсортирован
             assertTrue(isSorted(array));
@@ -151,7 +155,7 @@ public class HeapSortTest {
     void TestMainMethod(){
 
         String[] args = {};
-        
+
         HeapSort.main(args);
     }
 
