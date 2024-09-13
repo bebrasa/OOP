@@ -1,0 +1,2 @@
+Main-Class: ru.nsu.kochanov.HeapSort
+Manifest-Version: 1.0
