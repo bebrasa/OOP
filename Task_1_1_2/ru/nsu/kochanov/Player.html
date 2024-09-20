@@ -132,6 +132,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public class <span class="typeNameLabel">Player</span>
 extends java.lang.Object</pre>
+<div class="block">Represents a Player in the game, having a deck of cards and the ability to manage their hand.</div>
 </li>
 </ul>
 </div>
@@ -176,7 +177,9 @@ extends java.lang.Object</pre>
 </tr>
 <tr class="altColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(ru.nsu.kochanov.Deck)">Player</a></span>&#8203;(<a href="Deck.html" title="class in ru.nsu.kochanov">Deck</a>&nbsp;deck)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Constructs a Player with a given deck and shuffles the deck.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -199,32 +202,44 @@ extends java.lang.Object</pre>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#calcScore(java.util.ArrayList)">calcScore</a></span>&#8203;(java.util.ArrayList&lt;<a href="Card.html" title="class in ru.nsu.kochanov">Card</a>&gt;&nbsp;cards)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Calculates the score based on the provided cards.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPlayerCards()">getPlayerCards</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Deals cards to the player.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPlayerCount()">getPlayerCount</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns the number of cards the player has.</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#playerScore()">playerScore</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Gets the current score of the player based on their cards.</div>
+</td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#showLastCard()">showLastCard</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Shows the last card of the player.</div>
+</td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#showPlayerCards()">showPlayerCards</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Displays the player's cards in a string format.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -276,6 +291,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>Player</h4>
 <pre>public&nbsp;Player&#8203;(<a href="Deck.html" title="class in ru.nsu.kochanov">Deck</a>&nbsp;deck)</pre>
+<div class="block">Constructs a Player with a given deck and shuffles the deck.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>deck</code> - The deck of cards used by the player.</dd>
+</dl>
 </li>
 </ul>
 </li>
@@ -295,6 +315,8 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getPlayerCards</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;getPlayerCards()</pre>
+<div class="block">Deals cards to the player. If no cards are dealt yet, deals two cards;
+ otherwise, deals one card.</div>
 </li>
 </ul>
 <a id="getPlayerCount()">
@@ -304,6 +326,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getPlayerCount</h4>
 <pre class="methodSignature">public&nbsp;int&nbsp;getPlayerCount()</pre>
+<div class="block">Returns the number of cards the player has.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>The count of player's cards.</dd>
+</dl>
 </li>
 </ul>
 <a id="showPlayerCards()">
@@ -313,6 +340,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>showPlayerCards</h4>
 <pre class="methodSignature">public&nbsp;java.lang.String&nbsp;showPlayerCards()</pre>
+<div class="block">Displays the player's cards in a string format.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>A string representing the player's cards, separated by commas.</dd>
+</dl>
 </li>
 </ul>
 <a id="showLastCard()">
@@ -322,6 +354,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>showLastCard</h4>
 <pre class="methodSignature">public&nbsp;java.lang.String&nbsp;showLastCard()</pre>
+<div class="block">Shows the last card of the player.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>A string representation of the last card's suit and rank.</dd>
+</dl>
 </li>
 </ul>
 <a id="calcScore(java.util.ArrayList)">
@@ -331,6 +368,13 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>calcScore</h4>
 <pre class="methodSignature">public&nbsp;int&nbsp;calcScore&#8203;(java.util.ArrayList&lt;<a href="Card.html" title="class in ru.nsu.kochanov">Card</a>&gt;&nbsp;cards)</pre>
+<div class="block">Calculates the score based on the provided cards.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>cards</code> - The cards to calculate the score for.</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>The calculated score.</dd>
+</dl>
 </li>
 </ul>
 <a id="playerScore()">
@@ -340,6 +384,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>playerScore</h4>
 <pre class="methodSignature">public&nbsp;int&nbsp;playerScore()</pre>
+<div class="block">Gets the current score of the player based on their cards.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>The player's score.</dd>
+</dl>
 </li>
 </ul>
 </li>
