@@ -3,6 +3,7 @@ package ru.nsu.kochanov;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -63,7 +64,7 @@ class GameLogicTest {
         String output = outContent.toString();
         assertTrue(output.contains("Добро пожаловать в Блэкджек!"), "Ожидается вывод приветствия");
         assertTrue(output.contains("Сколько раундов вы хотите сыграть?"),
-            "Ожидается вывод про количество раундов");
+                "Ожидается вывод про количество раундов");
         assertTrue(output.contains("Ваши карты:"), "Ожидается вывод карт игрока");
         assertTrue(output.contains("Карты дилера:"), "Ожидается вывод карт дилера");
     }
