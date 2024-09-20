@@ -132,6 +132,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public class <span class="typeNameLabel">Deck</span>
 extends java.lang.Object</pre>
+<div class="block">The Deck class represents a standard deck of playing cards used in Blackjack.
+ It allows for creating a deck, shuffling the deck, and drawing cards from it.</div>
 </li>
 </ul>
 </div>
@@ -153,7 +155,9 @@ extends java.lang.Object</pre>
 </tr>
 <tr class="altColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E()">Deck</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Constructor for Deck.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -176,12 +180,16 @@ extends java.lang.Object</pre>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#shuffle()">shuffle</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Shuffles the deck using the Fisher-Yates algorithm.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="Card.html" title="class in ru.nsu.kochanov">Card</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#takeCard()">takeCard</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Takes a card from the top of the deck.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -214,6 +222,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>Deck</h4>
 <pre>public&nbsp;Deck()</pre>
+<div class="block">Constructor for Deck. It initializes the deck with 52 cards (13 ranks in 4 suits).</div>
 </li>
 </ul>
 </li>
@@ -233,6 +242,8 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>shuffle</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;shuffle()</pre>
+<div class="block">Shuffles the deck using the Fisher-Yates algorithm.
+ It randomly rearranges the cards in the deck.</div>
 </li>
 </ul>
 <a id="takeCard()">
@@ -242,6 +253,12 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>takeCard</h4>
 <pre class="methodSignature">public&nbsp;<a href="Card.html" title="class in ru.nsu.kochanov">Card</a>&nbsp;takeCard()</pre>
+<div class="block">Takes a card from the top of the deck.
+ If the deck is not empty, removes and returns the top card; otherwise, returns null.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the card from the top of the deck or null if the deck is empty</dd>
+</dl>
 </li>
 </ul>
 </li>
