@@ -1,11 +1,11 @@
 package ru.nsu.kochanov;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -51,7 +51,7 @@ class GameLogicTest {
     @Test
     void testStartGame() {
         // Подготавливаем ввод для симуляции игры
-        String simulatedInput = "1\n1\n0\n"; // Имитируем ввод: первый раунд, берем карту и останавливаемся
+        String simulatedInput = "1\n1\n0\n";
         ByteArrayInputStream in = new ByteArrayInputStream(simulatedInput.getBytes());
         System.setIn(in);
 
@@ -62,7 +62,8 @@ class GameLogicTest {
         // Проверяем, что нужные строки были выведены
         String output = outContent.toString();
         assertTrue(output.contains("Добро пожаловать в Блэкджек!"), "Ожидается вывод приветствия");
-        assertTrue(output.contains("Сколько раундов вы хотите сыграть?"), "Ожидается вывод про количество раундов");
+        assertTrue(output.contains("Сколько раундов вы хотите сыграть?"),
+            "Ожидается вывод про количество раундов");
         assertTrue(output.contains("Ваши карты:"), "Ожидается вывод карт игрока");
         assertTrue(output.contains("Карты дилера:"), "Ожидается вывод карт дилера");
     }

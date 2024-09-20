@@ -27,47 +27,55 @@ public class GameLogic {
             dealer.getPlayerCards();
             System.out.println("Диллер раздал карты");
             System.out.print("  Ваши карты: ");
-            System.out.println("[" + player.ShowPlayerCards() + "]" + "   -->  " + player.playerScore());
+            System.out.println("[" + player.showPlayerCards() + "]"
+                + "   -->  " + player.playerScore());
             if (player.playerScore() == 21) {
                 playerW++;
-                System.out.println("Вы выиграли раунд! Счёт " + playerW + ":" + dealerW + " в вашу пользу");
+                System.out.println("Вы выиграли раунд! Счёт " + playerW + ":"
+                    + dealerW + " в вашу пользу");
                 break;
             }
             System.out.print("  Карты дилера: ");
-            System.out.println("[" + dealer.ShowPlayerCards() + "]");
+            System.out.println("[" + dealer.showPlayerCards() + "]");
             System.out.println("Ваш ход:\n-------");
             System.out.println("Введите “1”, чтобы взять карту, и “0”, чтобы остановиться...");
             int playerChoise = in.nextInt();
             while (playerChoise != 0) {
                 player.getPlayerCards();
-                System.out.println("Вы открыли карту " + player.ShowLastCard());
+                System.out.println("Вы открыли карту " + player.showLastCard());
                 System.out.print("  Ваши карты: ");
-                System.out.println("[" + player.ShowPlayerCards() + "]" + "   -->  " + player.playerScore());
+                System.out.println("[" + player.showPlayerCards() + "]"
+                    + "   -->  " + player.playerScore());
                 if (player.playerScore() == 21) {
                     playerW++;
-                    System.out.println("Вы выиграли раунд! Счёт " + playerW + ":" + dealerW + " в вашу пользу");
+                    System.out.println("Вы выиграли раунд! Счёт " + playerW
+                        + ":" + dealerW + " в вашу пользу");
                     break;
                 }
                 if (player.playerScore() > 21) {
                     dealerW++;
-                    System.out.println("Вы проиграли раунд! Счёт " + playerW + ":" + dealerW + " в пользу дилера");
+                    System.out.println("Вы проиграли раунд! Счёт " + playerW
+                        + ":" + dealerW + " в пользу дилера");
                     break;
                 }
                 System.out.print("  Карты дилера: ");
-                System.out.println("[" + dealer.ShowPlayerCards() + "]");
+                System.out.println("[" + dealer.showPlayerCards() + "]");
                 System.out.println("Введите “1”, чтобы взять карту, и “0”, чтобы остановиться...");
                 playerChoise = in.nextInt();
             }
             if (player.playerScore() < 21) {
                 System.out.println("Ход дилера\n-------");
-                System.out.println("Дилер открывает закрытую карту " + dealer.ShowLastCard());
+                System.out.println("Дилер открывает закрытую карту " + dealer.showLastCard());
                 System.out.print("  Ваши карты: ");
-                System.out.println("[" + player.ShowPlayerCards() + "]" + "   -->  " + player.playerScore());
+                System.out.println("[" + player.showPlayerCards() + "]"
+                    + "   -->  " + player.playerScore());
                 System.out.print("  Карты дилера: ");
-                System.out.println("[" + dealer.ShowAllCards() + "]" + "   -->  " + dealer.playerScore());
+                System.out.println("[" + dealer.showAllCards() + "]"
+                    + "   -->  " + dealer.playerScore());
                 if (dealer.playerScore() == 21) {
                     dealerW++;
-                    System.out.println("Вы проиграли раунд! Счёт " + playerW + ":" + dealerW + " в пользу дилера");
+                    System.out.println("Вы проиграли раунд! Счёт " + playerW
+                        + ":" + dealerW + " в пользу дилера");
                     break;
                 }
 
@@ -75,25 +83,30 @@ public class GameLogic {
 
 
                     dealer.getPlayerCards();
-                    System.out.println("Дилер открывает карту " + dealer.ShowLastCard());
+                    System.out.println("Дилер открывает карту " + dealer.showLastCard());
                     System.out.print("  Ваши карты: ");
-                    System.out.println("[" + player.ShowPlayerCards() + "]" + "   -->  " + player.playerScore());
+                    System.out.println("[" + player.showPlayerCards() + "]"
+                        + "   -->  " + player.playerScore());
                     System.out.print("  Карты дилера: ");
-                    System.out.println("[" + dealer.ShowAllCards() + "]" + "   -->  " + dealer.playerScore());
+                    System.out.println("[" + dealer.showAllCards() + "]"
+                        + "   -->  " + dealer.playerScore());
                     if (dealer.playerScore() > 21) {
                         playerW++;
-                        System.out.println("Вы выиграли раунд! Счёт " + playerW + ":" + dealerW + " в вашу пользу");
+                        System.out.println("Вы выиграли раунд! Счёт " + playerW
+                            + ":" + dealerW + " в вашу пользу");
                         break;
                     }
                 }
                 if (dealer.playerScore() > player.playerScore() && dealer.playerScore() < 21) {
                     dealerW++;
-                    System.out.println("Вы проиграли раунд! Счёт " + playerW + ":" + dealerW + " в пользу дилера");
+                    System.out.println("Вы проиграли раунд! Счёт " + playerW
+                        + ":" + dealerW + " в пользу дилера");
                     continue;
                 }
                 if (player.playerScore() > dealer.playerScore() && player.playerScore() < 21) {
                     playerW++;
-                    System.out.println("Вы выиграли раунд! Счёт " + playerW + ":" + dealerW + " в вашу пользу");
+                    System.out.println("Вы выиграли раунд! Счёт " + playerW
+                        + ":" + dealerW + " в вашу пользу");
                     continue;
                 }
             }

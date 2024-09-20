@@ -24,8 +24,8 @@ public class Player {
         return playerCards.size();
     }
 
-    public String ShowPlayerCards() {
-        StringBuilder cards = new StringBuilder(); // Создаем StringBuilder для эффективного формирования строки
+    public String showPlayerCards() {
+        StringBuilder cards = new StringBuilder();
         for (Card card : playerCards) {
             cards.append(card.getSuitRank()).append(", "); // Добавляем каждую карту и разделитель
         }
@@ -38,7 +38,7 @@ public class Player {
         return cards.toString(); // Возвращаем сформированную строку
     }
 
-    public String ShowLastCard() {
+    public String showLastCard() {
         return playerCards.get(getPlayerCount() - 1).getSuitRank();
     }
 
@@ -93,7 +93,7 @@ class Dealer extends Player {
     }
 
     @Override
-    public String ShowPlayerCards() {
+    public String showPlayerCards() {
         if (getPlayerCount() > 1) {
             StringBuilder cards = new StringBuilder();
             for (int i = 0; i < getPlayerCount() - 1; i++) {
@@ -102,11 +102,11 @@ class Dealer extends Player {
             cards.append("<скрытая карта>");
             return cards.toString();
         }
-        return super.ShowPlayerCards();
+        return super.showPlayerCards();
     }
 
-    public String ShowAllCards() {
-        return super.ShowPlayerCards();
+    public String showAllCards() {
+        return super.showPlayerCards();
     }
 
 }
