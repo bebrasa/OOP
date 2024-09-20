@@ -6,22 +6,24 @@ public class Player {
     Deck deck = new Deck();
     public ArrayList<Card> playerCards;
 
-    public Player(Deck deck){
+    public Player(Deck deck) {
         this.playerCards = new ArrayList<>();
         this.deck.shuffle();
     }
-    public void getPlayerCards(){
-        if (playerCards.isEmpty()){
+
+    public void getPlayerCards() {
+        if (playerCards.isEmpty()) {
             playerCards.add(deck.takeCard());
             playerCards.add(deck.takeCard());
-        }
-        else{
+        } else {
             playerCards.add(deck.takeCard());
         }
     }
+
     public int getPlayerCount() {
         return playerCards.size();
     }
+
     public String ShowPlayerCards() {
         StringBuilder cards = new StringBuilder(); // Создаем StringBuilder для эффективного формирования строки
         for (Card card : playerCards) {
@@ -35,15 +37,16 @@ public class Player {
 
         return cards.toString(); // Возвращаем сформированную строку
     }
-    public String ShowLastCard(){
+
+    public String ShowLastCard() {
         return playerCards.get(getPlayerCount() - 1).getSuitRank();
     }
-    public int calcScore(ArrayList<Card> cards){
+
+    public int calcScore(ArrayList<Card> cards) {
         int score = 0;
         int acesCount = 0;
 
-        for(Card card: cards)
-        {
+        for (Card card : cards) {
             String rank = card.getRank();
             switch (rank) {
                 case "2":
@@ -67,28 +70,28 @@ public class Player {
                     break;
             }
         }
-        for(int i = 0; i < acesCount; i++)
-        {
-            if (score + 11 <= 21){
-                score +=11;
-            }
-            else{
-                score +=1;
+        for (int i = 0; i < acesCount; i++) {
+            if (score + 11 <= 21) {
+                score += 11;
+            } else {
+                score += 1;
             }
         }
         return score;
     }
-    public int playerScore(){
+
+    public int playerScore() {
         return calcScore(playerCards);
     }
 }
 
-class Dealer extends Player{
+class Dealer extends Player {
     private ArrayList<Card> dealerCards;
 
-    public Dealer(Deck deck){
+    public Dealer(Deck deck) {
         super(deck);
     }
+
     @Override
     public String ShowPlayerCards() {
         if (getPlayerCount() > 1) {
@@ -101,7 +104,8 @@ class Dealer extends Player{
         }
         return super.ShowPlayerCards();
     }
-    public String ShowAllCards(){
+
+    public String ShowAllCards() {
         return super.ShowPlayerCards();
     }
 
