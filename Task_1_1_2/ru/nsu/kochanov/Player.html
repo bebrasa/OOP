@@ -132,7 +132,9 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <hr>
 <pre>public class <span class="typeNameLabel">Player</span>
 extends java.lang.Object</pre>
-<div class="block">Represents a Player in the game, having a deck of cards and the ability to manage their hand.</div>
+<div class="block">The Player class represents a player in a Blackjack game.
+ It holds the cards the player has, calculates the score,
+ and manages the player's actions such as getting new cards.</div>
 </li>
 </ul>
 </div>
@@ -178,7 +180,7 @@ extends java.lang.Object</pre>
 <tr class="altColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(ru.nsu.kochanov.Deck)">Player</a></span>&#8203;(<a href="Deck.html" title="class in ru.nsu.kochanov">Deck</a>&nbsp;deck)</code></th>
 <td class="colLast">
-<div class="block">Constructs a Player with a given deck and shuffles the deck.</div>
+<div class="block">Constructor to initialize a player with a shuffled deck.</div>
 </td>
 </tr>
 </table>
@@ -203,42 +205,42 @@ extends java.lang.Object</pre>
 <td class="colFirst"><code>int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#calcScore(java.util.ArrayList)">calcScore</a></span>&#8203;(java.util.ArrayList&lt;<a href="Card.html" title="class in ru.nsu.kochanov">Card</a>&gt;&nbsp;cards)</code></th>
 <td class="colLast">
-<div class="block">Calculates the score based on the provided cards.</div>
+<div class="block">Calculates the score for the given list of cards.</div>
 </td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPlayerCards()">getPlayerCards</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Deals cards to the player.</div>
+<div class="block">Method to deal cards to the player.</div>
 </td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPlayerCount()">getPlayerCount</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Returns the number of cards the player has.</div>
+<div class="block">Returns the number of cards the player currently holds.</div>
 </td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#playerScore()">playerScore</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Gets the current score of the player based on their cards.</div>
+<div class="block">Returns the total score of the player's hand.</div>
 </td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#showLastCard()">showLastCard</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Shows the last card of the player.</div>
+<div class="block">Displays the last card drawn by the player.</div>
 </td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#showPlayerCards()">showPlayerCards</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Displays the player's cards in a string format.</div>
+<div class="block">Displays all the cards that the player currently holds in hand.</div>
 </td>
 </tr>
 </table>
@@ -291,10 +293,10 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>Player</h4>
 <pre>public&nbsp;Player&#8203;(<a href="Deck.html" title="class in ru.nsu.kochanov">Deck</a>&nbsp;deck)</pre>
-<div class="block">Constructs a Player with a given deck and shuffles the deck.</div>
+<div class="block">Constructor to initialize a player with a shuffled deck.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>deck</code> - The deck of cards used by the player.</dd>
+<dd><code>deck</code> - the deck from which the player draws cards</dd>
 </dl>
 </li>
 </ul>
@@ -315,8 +317,8 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getPlayerCards</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;getPlayerCards()</pre>
-<div class="block">Deals cards to the player. If no cards are dealt yet, deals two cards;
- otherwise, deals one card.</div>
+<div class="block">Method to deal cards to the player. If no cards are dealt yet,
+ it deals two cards; otherwise, it adds one more card.</div>
 </li>
 </ul>
 <a id="getPlayerCount()">
@@ -326,10 +328,10 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getPlayerCount</h4>
 <pre class="methodSignature">public&nbsp;int&nbsp;getPlayerCount()</pre>
-<div class="block">Returns the number of cards the player has.</div>
+<div class="block">Returns the number of cards the player currently holds.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>The count of player's cards.</dd>
+<dd>the number of cards in the player's hand</dd>
 </dl>
 </li>
 </ul>
@@ -340,10 +342,10 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>showPlayerCards</h4>
 <pre class="methodSignature">public&nbsp;java.lang.String&nbsp;showPlayerCards()</pre>
-<div class="block">Displays the player's cards in a string format.</div>
+<div class="block">Displays all the cards that the player currently holds in hand.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>A string representing the player's cards, separated by commas.</dd>
+<dd>a string representing the player's cards</dd>
 </dl>
 </li>
 </ul>
@@ -354,10 +356,10 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>showLastCard</h4>
 <pre class="methodSignature">public&nbsp;java.lang.String&nbsp;showLastCard()</pre>
-<div class="block">Shows the last card of the player.</div>
+<div class="block">Displays the last card drawn by the player.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>A string representation of the last card's suit and rank.</dd>
+<dd>a string representing the last card in the player's hand</dd>
 </dl>
 </li>
 </ul>
@@ -368,12 +370,12 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>calcScore</h4>
 <pre class="methodSignature">public&nbsp;int&nbsp;calcScore&#8203;(java.util.ArrayList&lt;<a href="Card.html" title="class in ru.nsu.kochanov">Card</a>&gt;&nbsp;cards)</pre>
-<div class="block">Calculates the score based on the provided cards.</div>
+<div class="block">Calculates the score for the given list of cards.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>cards</code> - The cards to calculate the score for.</dd>
+<dd><code>cards</code> - the cards to calculate the score for</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>The calculated score.</dd>
+<dd>the total score based on the cards</dd>
 </dl>
 </li>
 </ul>
@@ -384,10 +386,10 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>playerScore</h4>
 <pre class="methodSignature">public&nbsp;int&nbsp;playerScore()</pre>
-<div class="block">Gets the current score of the player based on their cards.</div>
+<div class="block">Returns the total score of the player's hand.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>The player's score.</dd>
+<dd>the player's current score</dd>
 </dl>
 </li>
 </ul>
