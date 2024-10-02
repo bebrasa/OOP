@@ -178,9 +178,9 @@ extends java.lang.Object</pre>
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr class="altColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(ru.nsu.kochanov.Deck)">Player</a></span>&#8203;(<a href="Deck.html" title="class in ru.nsu.kochanov">Deck</a>&nbsp;deck)</code></th>
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E()">Player</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Constructor to initialize a player with a shuffled deck.</div>
+<div class="block">Constructor to initialize a player with a deck.</div>
 </td>
 </tr>
 </table>
@@ -210,7 +210,7 @@ extends java.lang.Object</pre>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPlayerCards()">getPlayerCards</a></span>()</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPlayerCards(ru.nsu.kochanov.Deck)">getPlayerCards</a></span>&#8203;(<a href="Deck.html" title="class in ru.nsu.kochanov">Deck</a>&nbsp;deck)</code></th>
 <td class="colLast">
 <div class="block">Method to deal cards to the player.</div>
 </td>
@@ -286,18 +286,14 @@ extends java.lang.Object</pre>
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a id="&lt;init&gt;(ru.nsu.kochanov.Deck)">
+<a id="&lt;init&gt;()">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>Player</h4>
-<pre>public&nbsp;Player&#8203;(<a href="Deck.html" title="class in ru.nsu.kochanov">Deck</a>&nbsp;deck)</pre>
-<div class="block">Constructor to initialize a player with a shuffled deck.</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>deck</code> - the deck from which the player draws cards</dd>
-</dl>
+<pre>public&nbsp;Player()</pre>
+<div class="block">Constructor to initialize a player with a deck.</div>
 </li>
 </ul>
 </li>
@@ -310,13 +306,13 @@ extends java.lang.Object</pre>
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a id="getPlayerCards()">
+<a id="getPlayerCards(ru.nsu.kochanov.Deck)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>getPlayerCards</h4>
-<pre class="methodSignature">public&nbsp;void&nbsp;getPlayerCards()</pre>
+<pre class="methodSignature">public&nbsp;void&nbsp;getPlayerCards&#8203;(<a href="Deck.html" title="class in ru.nsu.kochanov">Deck</a>&nbsp;deck)</pre>
 <div class="block">Method to deal cards to the player. If no cards are dealt yet,
  it deals two cards; otherwise, it adds one more card.</div>
 </li>
