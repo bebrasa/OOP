@@ -23,28 +23,31 @@ class GameLogicTest {
     void setUp() {
         Deck deck = new Deck(); // Создаем колоду
         deck.shuffle();         // Перемешиваем
-        player = new Player(deck);
-        dealer = new Dealer(deck);
+        player = new Player();
+        dealer = new Dealer();
         game = new GameLogic();
         System.setOut(new PrintStream(outContent));
     }
 
     @Test
     void testPlayerCardsCount() {
-        player.getPlayerCards();
+        Deck deck = new Deck();
+        player.getPlayerCards(deck);
         assertEquals(2, player.getPlayerCount());
     }
 
     @Test
     void testPlayerScore() {
-        player.getPlayerCards();
+        Deck deck = new Deck();
+        player.getPlayerCards(deck);
         int score = player.playerScore();
         assertTrue(score > 0 && score <= 21);
     }
 
     @Test
     void testDealerScore() {
-        dealer.getPlayerCards();
+        Deck deck = new Deck();
+        dealer.getPlayerCards(deck);
         int score = dealer.playerScore();
         assertTrue(score > 0 && score <= 21);
     }

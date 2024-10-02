@@ -8,24 +8,21 @@ import java.util.ArrayList;
  * and manages the player's actions such as getting new cards.
  */
 public class Player {
-    Deck deck = new Deck();
     public ArrayList<Card> playerCards;
 
     /**
-     * Constructor to initialize a player with a shuffled deck.
+     * Constructor to initialize a player with a deck.
      *
-     * @param deck the deck from which the player draws cards
      */
-    public Player(Deck deck) {
+    public Player() {
         this.playerCards = new ArrayList<>();
-        this.deck.shuffle();
     }
 
     /**
      * Method to deal cards to the player. If no cards are dealt yet,
      * it deals two cards; otherwise, it adds one more card.
      */
-    public void getPlayerCards() {
+    public void getPlayerCards(Deck deck) {
         if (playerCards.isEmpty()) {
             playerCards.add(deck.takeCard());
             playerCards.add(deck.takeCard());
@@ -131,15 +128,12 @@ public class Player {
  * as hiding a card from the player.
  */
 class Dealer extends Player {
-    private ArrayList<Card> dealerCards;
 
     /**
-     * Constructor to initialize a dealer with a shuffled deck.
-     *
-     * @param deck the deck from which the dealer draws cards
+     * Constructor to initialize a dealer with the same deck as the player.
      */
-    public Dealer(Deck deck) {
-        super(deck);
+    public Dealer() {
+        super();  // Передаем ту же самую колоду
     }
 
     /**
