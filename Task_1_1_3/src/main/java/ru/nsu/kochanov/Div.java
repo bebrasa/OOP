@@ -2,6 +2,10 @@ package ru.nsu.kochanov;
 
 import java.util.Map;
 
+/**
+ * Этот класс для деления.
+ */
+
 public class Div extends Expression {
     Expression left, right;
 

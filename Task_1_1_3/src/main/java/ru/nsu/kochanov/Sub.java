@@ -2,6 +2,10 @@ package ru.nsu.kochanov;
 
 import java.util.Map;
 
+/**
+ * Этот класс для разности.
+ */
+
 public class Sub extends Expression {
     Expression left, right;
 

@@ -1,15 +1,17 @@
 package ru.nsu.kochanov;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.Map;
 import org.junit.jupiter.api.Test;
 
-import java.util.Iterator;
-import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
+/**
+ * Этот тестовый класс тестирует произведение.
+ */
 
 class MulTest {
     @Test
-    void testEval(){
+    void testEval() {
         Expression left = new Number(5);
         Expression right = new Variable("x");
 

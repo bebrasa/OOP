@@ -1,23 +1,26 @@
 package ru.nsu.kochanov;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Map;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+/**
+ * Этот тестовый класс тестирует разность.
+ */
 
 class SubTest {
     @Test
-    void testEval(){
+    void testEval() {
         Expression left = new Number(10);
         Expression right = new Variable("x");
         Sub sub = new Sub(left, right);
         Map<String, Integer> values = Map.of("x", 5);
-        assertEquals(5,sub.eval(values));
+        assertEquals(5, sub.eval(values));
     }
 
     @Test
-    void testDerivative(){
+    void testDerivative() {
         Expression left = new Number(15);
         Expression right = new Variable("x");
         Sub sub = new Sub(left, right);

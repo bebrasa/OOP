@@ -1,15 +1,18 @@
 package ru.nsu.kochanov;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Map;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+/**
+ * Этот тестовый класс тестирует сумму.
+ */
 
 class AddTest {
 
     @Test
-    void testPrint(){
+    void testPrint() {
         Expression left = new Number(2);
         Expression right = new Number(3);
         Add add = new Add(left, right);
@@ -17,7 +20,7 @@ class AddTest {
     }
 
     @Test
-    void testDerivative(){
+    void testDerivative() {
         Expression left = new Variable("x");
         Expression right = new Number(4);
         Add add = new Add(left, right);
@@ -26,7 +29,7 @@ class AddTest {
     }
 
     @Test
-    void testEval(){
+    void testEval() {
         Expression left = new Variable("x");
         Expression right = new Number(4);
         Add add = new Add(left, right);

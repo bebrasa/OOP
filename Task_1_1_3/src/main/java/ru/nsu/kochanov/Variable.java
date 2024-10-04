@@ -2,6 +2,10 @@ package ru.nsu.kochanov;
 
 import java.util.Map;
 
+/**
+ * Этот класс создает переменную и методы.
+ */
+
 public class Variable extends Expression {
     String name;
 

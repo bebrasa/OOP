@@ -2,6 +2,10 @@ package ru.nsu.kochanov;
 
 import java.util.Map;
 
+/**
+ * Этот класс для создания числа.
+ */
+
 public class Number extends Expression {
     int value;
 

@@ -2,6 +2,10 @@ package ru.nsu.kochanov;
 
 import java.util.Map;
 
+/**
+ * Этот класс для умножения.
+ */
+
 public class Mul extends Expression {
     Expression left, right;
 
