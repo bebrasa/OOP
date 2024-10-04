@@ -3,6 +3,9 @@ package ru.nsu.kochanov;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Эта программа может складывать, брать производную и другие математические операциию
+ */
 public class Main {
     public static void main(String[] args) {
         // Пример выражения: 3 + (2 * x)
