@@ -22,6 +22,6 @@ public class Sub extends Expression {
 
     @Override
     public Expression derivative(String variable) {
-        return new Add(left.derivative(variable), right.derivative(variable));
+        return new Sub(left.derivative(variable), right.derivative(variable));
     }
 }
