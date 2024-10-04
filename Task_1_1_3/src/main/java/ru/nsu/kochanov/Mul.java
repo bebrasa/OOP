@@ -7,7 +7,8 @@ import java.util.Map;
  */
 
 public class Mul extends Expression {
-    Expression left, right;
+    Expression left;
+    Expression right;
 
     public Mul(Expression left, Expression right) {
         this.left = left;

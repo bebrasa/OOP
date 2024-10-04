@@ -7,7 +7,8 @@ import java.util.Map;
  */
 
 public class Add extends Expression {
-    Expression left, right;
+    Expression left;
+    Expression right;
 
     public Add(Expression left, Expression right) {
         this.left = left;

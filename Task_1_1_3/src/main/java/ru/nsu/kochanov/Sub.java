@@ -7,7 +7,8 @@ import java.util.Map;
  */
 
 public class Sub extends Expression {
-    Expression left, right;
+    Expression left;
+    Expression right;
 
     public Sub(Expression left, Expression right) {
         this.left = left;
