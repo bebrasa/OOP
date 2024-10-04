@@ -36,4 +36,13 @@ class DivTest {
         assertEquals("((((0+1)*(x*5))-((10+x)*((1*5)+(x*0))))/((x*5)*(x*5)))", div.print());
 
     }
+
+    @Test
+    void testDerivative2(){
+        Expression left = new Variable("x");
+        Expression right = new Number(4);
+        Div div = new Div(left, right);
+        Expression derivative = div.derivative("x");
+        assertEquals("(((1*4)-(x*0))/(4*4))", derivative.print());
+    }
 }
