@@ -19,7 +19,7 @@ class DivTest {
     }
 
     @Test
-    void testEval() {
+    void testEval() throws MyException {
         Expression left = new Number(10);
         Expression right = new Variable("x");
         Div div = new Div(left, right);
@@ -28,7 +28,7 @@ class DivTest {
     }
 
     @Test
-    void testDerivative() {
+    void testDerivative() throws MyException {
         Expression left = new Add(new Number(10), new Variable("x"));
         Expression right = new Mul(new Variable("x"), new Number(5));
         Expression ld = left.derivative("x");

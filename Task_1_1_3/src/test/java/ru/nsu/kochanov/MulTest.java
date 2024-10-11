@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 class MulTest {
     @Test
-    void testEval() {
+    void testEval() throws MyException {
         Expression left = new Number(5);
         Expression right = new Variable("x");
 

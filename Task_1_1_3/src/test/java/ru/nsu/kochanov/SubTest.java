@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 class SubTest {
     @Test
-    void testEval() {
+    void testEval() throws MyException {
         Expression left = new Number(10);
         Expression right = new Variable("x");
         Sub sub = new Sub(left, right);
@@ -20,7 +20,7 @@ class SubTest {
     }
 
     @Test
-    void testDerivative() {
+    void testDerivative() throws MyException {
         Expression left = new Number(15);
         Expression right = new Variable("x");
         Sub sub = new Sub(left, right);

@@ -29,7 +29,7 @@ class AddTest {
     }
 
     @Test
-    void testEval() {
+    void testEval() throws MyException {
         Expression left = new Variable("x");
         Expression right = new Number(4);
         Add add = new Add(left, right);

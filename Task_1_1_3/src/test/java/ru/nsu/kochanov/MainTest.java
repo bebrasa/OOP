@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 public class MainTest {
 
     @Test
-    public void testExpressionPrinting() {
+    public void testExpressionPrinting() throws MyException {
         // Создание выражения
         Expression e = new Add(new Number(3), new Mul(new Number(2), new Variable("x")));
         // Ожидаемое представление выражения
@@ -23,7 +23,7 @@ public class MainTest {
     }
 
     @Test
-    public void testDerivative() {
+    public void testDerivative() throws MyException{
         // Создание выражения
         Expression e = new Add(new Number(3), new Mul(new Number(2), new Variable("x")));
         // Вычисление производной
@@ -35,7 +35,7 @@ public class MainTest {
     }
 
     @Test
-    public void testEvaluation() {
+    public void testEvaluation() throws MyException {
         // Создание выражения
         Expression e = new Add(new Number(3), new Mul(new Number(2), new Variable("x")));
         // Установка переменной x
