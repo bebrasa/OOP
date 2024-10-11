@@ -21,7 +21,7 @@ public class Sub extends Expression {
     }
 
     @Override
-    public int eval(Map<String, Integer> values) {
+    public int eval(Map<String, Integer> values) throws MyException {
         return left.eval(values) - right.eval(values);
     }
 

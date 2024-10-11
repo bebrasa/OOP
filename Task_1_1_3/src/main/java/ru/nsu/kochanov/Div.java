@@ -1,5 +1,6 @@
 package ru.nsu.kochanov;
 
+import java.io.IOException;
 import java.util.Map;
 
 /**
@@ -21,8 +22,16 @@ public class Div extends Expression {
     }
 
     @Override
-    public int eval(Map<String, Integer> values) {
-        return left.eval(values) / right.eval(values); // нужно исключение
+    public int eval(Map<String, Integer> values) throws MyException {
+        int rightValue = right.eval(values); // Сначала вычисляем правую часть
+
+        // Проверка на деление на ноль
+        if (rightValue == 0) {
+            throw new MyException("Деление на 0 невозможно");
+        }
+
+        // Если деление возможно, выполняем его
+        return left.eval(values) / rightValue;
     }
 
     @Override

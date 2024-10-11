@@ -11,5 +11,5 @@ public abstract class Expression {
 
     public abstract Expression derivative(String variable);
 
-    public abstract int eval(Map<String, Integer> values);
+    public abstract int eval(Map<String, Integer> values) throws MyException;
 }
