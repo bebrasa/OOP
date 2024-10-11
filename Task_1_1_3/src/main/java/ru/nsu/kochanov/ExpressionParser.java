@@ -50,7 +50,8 @@ public class ExpressionParser {
                 }
                 operators.pop(); // Убираем '('
             } else if (isOperator(c)) {
-                // Если это оператор, выполняем все операции с приоритетом выше или равным текущему оператору
+                // Если это оператор, выполняем все операции с приоритетом
+                // выше или равным текущему оператору
                 while (!operators.isEmpty() && precedence(operators.peek()) >= precedence(c)) {
                     expressions.push(applyOperator(operators.pop(),
                             expressions.pop(), expressions.pop()));
