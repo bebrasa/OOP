@@ -5,8 +5,8 @@ import java.util.Map;
 import java.util.Scanner;
 
 /**
- * Это мейн класс.
- */
+ * Это мейн класс, не знаю что тут написать.
+ * */
 
 public class Main {
     public static void main(String[] args) {

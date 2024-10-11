@@ -3,7 +3,8 @@ package ru.nsu.kochanov;
 import java.util.Stack;
 
 /**
- * Это класс парсера.
+ * Это класс парсера, он считывает ввод с консоли,
+ * и определяет что за символ он встретил.
  */
 
 public class ExpressionParser {
@@ -44,13 +45,15 @@ public class ExpressionParser {
             } else if (c == ')') {
                 // Если это закрывающая скобка, выполняем операции до открытия
                 while (!operators.isEmpty() && operators.peek() != '(') {
-                    expressions.push(applyOperator(operators.pop(), expressions.pop(), expressions.pop()));
+                    expressions.push(applyOperator(operators.pop(),
+                            expressions.pop(), expressions.pop()));
                 }
                 operators.pop(); // Убираем '('
             } else if (isOperator(c)) {
                 // Если это оператор, выполняем все операции с приоритетом выше или равным текущему оператору
                 while (!operators.isEmpty() && precedence(operators.peek()) >= precedence(c)) {
-                    expressions.push(applyOperator(operators.pop(), expressions.pop(), expressions.pop()));
+                    expressions.push(applyOperator(operators.pop(),
+                            expressions.pop(), expressions.pop()));
                 }
                 operators.push(c);
             }
@@ -58,7 +61,8 @@ public class ExpressionParser {
 
         // Выполняем оставшиеся операции
         while (!operators.isEmpty()) {
-            expressions.push(applyOperator(operators.pop(), expressions.pop(), expressions.pop()));
+            expressions.push(applyOperator(operators.pop(),
+                    expressions.pop(), expressions.pop()));
         }
 
         // Последнее выражение — результат
@@ -66,7 +70,8 @@ public class ExpressionParser {
     }
 
     // Применение оператора к двум выражениям
-    private static Expression applyOperator(char operator, Expression right, Expression left) throws MyException {
+    private static Expression applyOperator(char operator, Expression right,
+                                            Expression left) throws MyException {
         switch (operator) {
             case '+':
                 return new Add(left, right);

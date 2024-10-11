@@ -26,7 +26,7 @@ public class Add extends Expression {
     }
 
     @Override
-    public int eval(Map<String, Integer> values) throws MyException{
+    public int eval(Map<String, Integer> values) throws MyException {
         return left.eval(values) + right.eval(values);
     }
 }

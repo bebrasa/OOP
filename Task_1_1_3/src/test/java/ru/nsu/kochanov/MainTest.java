@@ -23,7 +23,7 @@ public class MainTest {
     }
 
     @Test
-    public void testDerivative() throws MyException{
+    public void testDerivative() throws MyException {
         // Создание выражения
         Expression e = new Add(new Number(3), new Mul(new Number(2), new Variable("x")));
         // Вычисление производной
