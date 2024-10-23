@@ -2,8 +2,8 @@ package ru.nsu.kochanov;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Queue;
 import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 
 
@@ -20,7 +20,9 @@ public class IncidenceMatrixGraph implements Graph {
 
     /**
      * This constructor need to know how many Vertices and Edges we have.
+     *
      * @param numVertices for number of Vertices.
+     *
      * @param numEdges for number of Edges.
      */
 
