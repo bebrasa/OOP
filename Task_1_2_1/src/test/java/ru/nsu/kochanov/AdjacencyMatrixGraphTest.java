@@ -21,6 +21,21 @@ class AdjacencyMatrixGraphTest {
     }
 
     @Test
+    void testToString() {
+        // Ожидаемое строковое представление для графа без рёбер (все элементы матрицы равны 0)
+        String expectedEmptyGraph = "0 0 0 0 0 \n0 0 0 0 0 \n0 0 0 0 0 \n0 0 0 0 0 \n0 0 0 0 0 \n";
+        assertEquals(expectedEmptyGraph, graph.toString(), "Строковое представление пустого графа некорректно");
+
+        // Добавляем рёбра
+        graph.addEdge(0, 1);
+        graph.addEdge(1, 2);
+
+        // Ожидаемое строковое представление после добавления рёбер
+        String expectedGraphWithEdges = "0 1 0 0 0 \n0 0 1 0 0 \n0 0 0 0 0 \n0 0 0 0 0 \n0 0 0 0 0 \n";
+        assertEquals(expectedGraphWithEdges, graph.toString(), "Строковое представление графа с рёбрами некорректно");
+    }
+
+    @Test
     void addVertex() {
         graph.addVertex(0);
         assertTrue(graph.getNeighbors(0).isEmpty(), "Вершина должна быть добавлена без соседей");

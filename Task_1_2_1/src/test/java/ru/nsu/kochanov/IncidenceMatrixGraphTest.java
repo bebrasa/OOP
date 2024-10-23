@@ -1,13 +1,12 @@
 package ru.nsu.kochanov;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.BeforeEach;
+import java.util.List;
+import org.junit.jupiter.api.Test;
 
 /**
  * This test for IncMatrix class.
@@ -81,7 +80,8 @@ class IncidenceMatrixGraphTest {
         graph.addEdge(1, 2);
 
         List<Integer> sorted = graph.topologicalSort();
-        assertEquals(List.of(0, 1, 2), sorted, "Топологическая сортировка должна вернуть правильный порядок вершин");
+        assertEquals(List.of(0, 1, 2), sorted, "Топологическая сортировка должна" +
+                " вернуть правильный порядок вершин");
     }
 
     @Test
@@ -115,6 +115,7 @@ class IncidenceMatrixGraphTest {
         graph.addEdge(1, 2);
 
         String expected = "0: 1 \n1: 2 \n2: \n";
-        assertEquals(expected, graph.toString(), "Метод toString() должен возвращать правильное представление графа");
+        assertEquals(expected, graph.toString(), "Метод toString() должен возвращать " +
+                "правильное представление графа");
     }
 }

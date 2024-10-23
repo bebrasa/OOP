@@ -1,8 +1,8 @@
 package ru.nsu.kochanov;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Stack;
@@ -23,7 +23,8 @@ public class AdjacencyListGraph implements Graph {
     @Override
     public void removeVertex(int v) {
         adjList.remove(v);
-        for (List<Integer> neighbours : adjList.values()){
+        for (List<Integer> neighbours : adjList.values())
+        {
             neighbours.remove(Integer.valueOf(v));
         }
     }
