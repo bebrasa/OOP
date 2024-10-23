@@ -1,11 +1,11 @@
 package ru.nsu.kochanov;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.BeforeEach;
 import java.util.List;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -80,8 +80,8 @@ class IncidenceMatrixGraphTest {
         graph.addEdge(1, 2);
 
         List<Integer> sorted = graph.topologicalSort();
-        assertEquals(List.of(0, 1, 2), sorted, "Топологическая сортировка должна" +
-                " вернуть правильный порядок вершин");
+        assertEquals(List.of(0, 1, 2), sorted, "Топологическая сортировка должна"
+                 + " вернуть правильный порядок вершин");
     }
 
     @Test
@@ -90,7 +90,8 @@ class IncidenceMatrixGraphTest {
         graph.addEdge(1, 2);
         graph.addEdge(2, 0);  // создаём цикл
 
-        Exception exception = assertThrows(IllegalStateException.class, () -> graph.topologicalSort());
+        Exception exception = assertThrows(IllegalStateException.class,
+                () -> graph.topologicalSort());
         assertEquals("Граф содержит цикл, топ сорт невозможна", exception.getMessage(),
                 "Топологическая сортировка должна выбросить исключение при наличии цикла");
     }
@@ -115,7 +116,7 @@ class IncidenceMatrixGraphTest {
         graph.addEdge(1, 2);
 
         String expected = "0: 1 \n1: 2 \n2: \n";
-        assertEquals(expected, graph.toString(), "Метод toString() должен возвращать " +
-                "правильное представление графа");
+        assertEquals(expected, graph.toString(), "Метод toString() должен возвращать "
+               + "правильное представление графа");
     }
 }

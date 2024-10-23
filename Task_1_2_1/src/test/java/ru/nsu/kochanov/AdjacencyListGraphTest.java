@@ -1,12 +1,11 @@
 package ru.nsu.kochanov;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.List;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * This test for adjList class.
@@ -66,6 +65,7 @@ class AdjacencyListGraphTest {
         graph.addEdge(1, 2);
 
         List<Integer> sorted = graph.topologicalSort();
-        assertEquals(List.of(0, 1, 2), sorted, "Топологическая сортировка должна вернуть правильный порядок вершин");
+        assertEquals(List.of(0, 1, 2), sorted, "Топологическая сортировка "
+                + "должна вернуть правильный порядок вершин");
     }
 }

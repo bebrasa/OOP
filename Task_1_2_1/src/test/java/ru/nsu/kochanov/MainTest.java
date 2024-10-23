@@ -60,26 +60,6 @@ class MainTest {
         assertTrue(output.contains("[0, 1, 2]"), "Топологическая сортировка должна быть [0, 1, 2]");
     }
 
-
-//    @Test
-//    void testMainWithNoEdges() {
-//        String input = "3 0\n";  // 3 вершины, 0 рёбер
-//        provideInput(input);
-//
-//        Main.main(new String[]{});
-//
-//        String output = getOutput();
-//
-//        // Проверяем вывод
-//        assertTrue(output.contains("Матрица смежности:"));
-//        assertTrue(output.contains("Матрица инцидентности:"));
-//        assertTrue(output.contains("Список смежности графа:"));
-//        assertTrue(output.contains("Топологическая сортировка:"));
-//
-//        // В графе без рёбер топологическая сортировка должна быть [0, 1, 2]
-//        assertTrue(output.contains("[0, 1, 2]"));
-//    }
-
     @Test
     void testMainWithSingleVertex() {
         String input = "1 0\n";  // 1 вершина, 0 рёбер
