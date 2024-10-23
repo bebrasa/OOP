@@ -2,9 +2,9 @@ package ru.nsu.kochanov;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Scanner;
 import java.util.Stack;
 
 /**
@@ -62,8 +62,12 @@ public class AdjacencyListGraph implements Graph {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof AdjacencyListGraph)) return false;
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof AdjacencyListGraph)) {
+            return false;
+        }
         AdjacencyListGraph other = (AdjacencyListGraph) obj;
         return adjList.equals(other.adjList);
     }

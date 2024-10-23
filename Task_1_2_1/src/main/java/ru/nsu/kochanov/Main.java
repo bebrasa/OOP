@@ -8,6 +8,9 @@ import java.util.Scanner;
  * так же для их заполнения и вызыва методов.
  */
 public class Main {
+    /**
+     * Test javadoc, because IDK what to write.
+     */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 

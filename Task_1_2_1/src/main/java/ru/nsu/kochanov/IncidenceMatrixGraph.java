@@ -3,8 +3,9 @@ package ru.nsu.kochanov;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
-import java.util.Scanner;
 import java.util.LinkedList;
+import java.util.Scanner;
+
 
 /**
  * Этот класс используется для хранения графа,
@@ -16,6 +17,12 @@ public class IncidenceMatrixGraph implements Graph {
     private int numVertices;
     private int numEdges;
     private int edgeCount = 0;  // счётчик для отслеживания текущего числа рёбер
+
+    /**
+     * This constructor need to know how many Vertices and Edges we have.
+     * @param numVertices for number of Vertices.
+     * @param numEdges for number of Edges.
+     */
 
     public IncidenceMatrixGraph(int numVertices, int numEdges) {
         this.numVertices = numVertices;
@@ -102,10 +109,16 @@ public class IncidenceMatrixGraph implements Graph {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
         IncidenceMatrixGraph other = (IncidenceMatrixGraph) obj;
-        if (numVertices != other.numVertices || numEdges != other.numEdges) return false;
+        if (numVertices != other.numVertices || numEdges != other.numEdges) {
+            return false;
+        }
 
         for (int i = 0; i < numVertices; i++) {
             for (int j = 0; j < numEdges; j++) {
@@ -170,6 +183,10 @@ public class IncidenceMatrixGraph implements Graph {
 
         return sorted;
     }
+
+    /**
+     * This method is using to print our matrix.
+     */
 
     public void printIncidenceMatrix() {
         for (int i = 0; i < numVertices; i++) {

@@ -65,10 +65,10 @@ public class AdjacencyMatrixGraph implements Graph {
     public void readFromTerminal() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Введите количество вершин и рёбер:");
-        int n = scanner.nextInt();  // Количество вершин
-        int m = scanner.nextInt();  // Количество рёбер
+        int n = scanner.nextInt();  // количество вершин
         this.numVertices = n;
         matrix = new int[n][n];
+        int m = scanner.nextInt();  // количество рёбер
 
         System.out.println("Введите рёбра:");
         for (int i = 0; i < m; i++) {
@@ -80,8 +80,12 @@ public class AdjacencyMatrixGraph implements Graph {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof AdjacencyMatrixGraph)) return false;
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof AdjacencyMatrixGraph)) {
+            return false;
+        }
         AdjacencyMatrixGraph other = (AdjacencyMatrixGraph) obj;
         return Arrays.deepEquals(matrix, other.matrix);
     }
@@ -115,6 +119,9 @@ public class AdjacencyMatrixGraph implements Graph {
         return result;
     }
 
+    /**
+     * This method is using for topological sort.
+     */
     private void topologicalSortUtil(int v, boolean[] visited, Stack<Integer> stack) {
         visited[v] = true;
         for (int i = 0; i < numVertices; i++) {
@@ -125,6 +132,9 @@ public class AdjacencyMatrixGraph implements Graph {
         stack.push(v);
     }
 
+    /**
+     * This method is using for print our Matrix.
+     */
     public void printAdjacencyMatrix() {
         for (int i = 0; i < numVertices; i++) {
             for (int j = 0; j < numVertices; j++) {
