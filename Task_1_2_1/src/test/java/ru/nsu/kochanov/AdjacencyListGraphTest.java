@@ -2,6 +2,8 @@ package ru.nsu.kochanov;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,6 +19,44 @@ class AdjacencyListGraphTest {
     @BeforeEach
     void setUp() {
         graph = new AdjacencyListGraph();
+    }
+
+    @Test
+    public void testEquals() {
+        // Создаем первый граф и добавляем в него рёбра
+        AdjacencyListGraph graph4 = new AdjacencyListGraph();
+        graph4.addVertex(1);
+        graph4.addVertex(2);
+        graph4.addVertex(3);
+        graph4.addVertex(4);
+        graph4.addEdge(1, 2);
+        graph4.addEdge(2, 3);
+        graph4.addEdge(3, 4);
+
+        // Создаем второй граф с теми же вершинами и рёбрами
+        AdjacencyListGraph graph5 = new AdjacencyListGraph();
+        graph5.addVertex(1);
+        graph5.addVertex(2);
+        graph5.addVertex(3);
+        graph5.addVertex(4);
+        graph5.addEdge(1, 2);
+        graph5.addEdge(2, 3);
+        graph5.addEdge(3, 4);
+
+        // Проверяем, что графы равны
+        assertEquals(graph4, graph5);
+
+        // Создаем третий граф с отличными рёбрами
+        AdjacencyListGraph graph6 = new AdjacencyListGraph();
+        graph6.addVertex(1);
+        graph6.addVertex(2);
+        graph6.addVertex(3);
+        graph6.addVertex(4);
+        graph6.addEdge(1, 2);
+        graph6.addEdge(3, 4); // Нет ребра (2, 3) как в graph1 и graph2
+
+        // Проверяем, что graph1 и graph3 не равны
+        assertNotEquals(graph4, graph6);
     }
 
     @Test
