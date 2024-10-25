@@ -1,5 +1,6 @@
 package ru.nsu.kochanov;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -45,8 +46,8 @@ public class AdjacencyListGraph implements Graph {
     }
 
     @Override
-    public void readFromTerminal() {
-        Scanner scanner = new Scanner(System.in);
+    public void readFromTerminal(InputStream inputStream) {
+        Scanner scanner = new Scanner(inputStream);
         System.out.println("Введите количество вершин и рёбер:");
         int n = scanner.nextInt();  // количество вершин
         int m = scanner.nextInt();  // количество рёбер

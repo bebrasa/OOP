@@ -1,5 +1,6 @@
 package ru.nsu.kochanov;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -62,8 +63,8 @@ public class AdjacencyMatrixGraph implements Graph {
     }
 
     @Override
-    public void readFromTerminal() {
-        Scanner scanner = new Scanner(System.in);
+    public void readFromTerminal(InputStream inputStream) {
+        Scanner scanner = new Scanner(inputStream);
         System.out.println("Введите количество вершин и рёбер:");
         int n = scanner.nextInt();  // количество вершин
         this.numVertices = n;

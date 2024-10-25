@@ -1,17 +1,12 @@
 package ru.nsu.kochanov;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
-import java.util.Scanner;
-
+import java.io.InputStream;
+import java.util.*;
 
 /**
  * Этот класс используется для хранения графа,
- * испольхуя матрицу инцидентности.
+ * используя матрицу инцидентности.
  */
-
 public class IncidenceMatrixGraph implements Graph {
     private int[][] incidenceMatrix;
     private int numVertices;
@@ -19,13 +14,11 @@ public class IncidenceMatrixGraph implements Graph {
     private int edgeCount = 0;  // счётчик для отслеживания текущего числа рёбер
 
     /**
-     * This constructor need to know how many Vertices and Edges we have.
+     * Конструктор, который принимает количество вершин и рёбер.
      *
-     * @param numVertices for number of Vertices.
-     *
-     * @param numEdges for number of Edges.
+     * @param numVertices количество вершин.
+     * @param numEdges количество рёбер.
      */
-
     public IncidenceMatrixGraph(int numVertices, int numEdges) {
         this.numVertices = numVertices;
         this.numEdges = numEdges;
@@ -34,15 +27,14 @@ public class IncidenceMatrixGraph implements Graph {
 
     @Override
     public void addVertex(int v) {
-        // матрица создается заранее и фиксируется в конструкторе,
-        // поэтому мы не добавляем вершины динамически.
+        // Матрица создается заранее и фиксируется в конструкторе,
+        // поэтому динамическое добавление вершин не поддерживается.
     }
 
     @Override
     public void removeVertex(int v) {
         if (v < 0 || v >= numVertices) {
-            System.out.println("Вершина вне диапазона");
-            return;
+            throw new IllegalArgumentException("Вершина вне диапазона");
         }
         for (int i = 0; i < numEdges; i++) {
             incidenceMatrix[v][i] = 0;  // убираем все связи, связанные с данной вершиной
@@ -52,12 +44,10 @@ public class IncidenceMatrixGraph implements Graph {
     @Override
     public void addEdge(int v1, int v2) {
         if (edgeCount >= numEdges) {
-            System.out.println("Невозможно добавить больше рёбер");
-            return;
+            throw new IllegalStateException("Невозможно добавить больше рёбер");
         }
         if (v1 < 0 || v1 >= numVertices || v2 < 0 || v2 >= numVertices) {
-            System.out.println("Вершины вне диапазона");
-            return;
+            throw new IllegalArgumentException("Вершины вне диапазона");
         }
         incidenceMatrix[v1][edgeCount] = 1;   // начальная вершина
         incidenceMatrix[v2][edgeCount] = -1;  // конечная вершина
@@ -91,11 +81,12 @@ public class IncidenceMatrixGraph implements Graph {
     }
 
     @Override
-    public void readFromTerminal() {
-        Scanner scanner = new Scanner(System.in);
+    public void readFromTerminal(InputStream inputStream) {
+        Scanner scanner = new Scanner(inputStream);
         System.out.println("Введите количество вершин и рёбер:");
         int n = scanner.nextInt();
         int m = scanner.nextInt();
+
         this.numVertices = n;
         this.numEdges = m;
         incidenceMatrix = new int[n][m];
@@ -105,31 +96,23 @@ public class IncidenceMatrixGraph implements Graph {
         for (int i = 0; i < m; i++) {
             int v1 = scanner.nextInt();
             int v2 = scanner.nextInt();
-            addEdge(v1, v2);  // используем addEdge, чтобы учесть валидацию
+            addEdge(v1, v2);  // используем addEdge для учёта валидации
         }
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-        IncidenceMatrixGraph other = (IncidenceMatrixGraph) obj;
-        if (numVertices != other.numVertices || numEdges != other.numEdges) {
-            return false;
-        }
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        IncidenceMatrixGraph that = (IncidenceMatrixGraph) o;
+        return numVertices == that.numVertices && numEdges == that.numEdges
+                && edgeCount == that.edgeCount
+                && Objects.deepEquals(incidenceMatrix, that.incidenceMatrix);
+    }
 
-        for (int i = 0; i < numVertices; i++) {
-            for (int j = 0; j < numEdges; j++) {
-                if (incidenceMatrix[i][j] != other.incidenceMatrix[i][j]) {
-                    return false;
-                }
-            }
-        }
-        return true;
+    @Override
+    public int hashCode() {
+        return Objects.hash(Arrays.deepHashCode(incidenceMatrix), numVertices, numEdges, edgeCount);
     }
 
     @Override
@@ -148,7 +131,7 @@ public class IncidenceMatrixGraph implements Graph {
 
     @Override
     public List<Integer> topologicalSort() {
-        System.out.println("топ сорт на матрице инц:");
+        System.out.println("Топологическая сортировка на матрице инцидентности:");
         int[] inDegree = new int[numVertices];
         for (int i = 0; i < numEdges; i++) {
             for (int j = 0; j < numVertices; j++) {
@@ -180,16 +163,15 @@ public class IncidenceMatrixGraph implements Graph {
         }
 
         if (sorted.size() != numVertices) {
-            throw new IllegalStateException("Граф содержит цикл, топ сорт невозможна");
+            throw new IllegalStateException("Граф содержит цикл, топологическая сортировка невозможна");
         }
 
         return sorted;
     }
 
     /**
-     * This method is using to print our matrix.
+     * Метод для вывода матрицы инцидентности.
      */
-
     public void printIncidenceMatrix() {
         for (int i = 0; i < numVertices; i++) {
             for (int j = 0; j < numEdges; j++) {

@@ -1,5 +1,6 @@
 package ru.nsu.kochanov;
 
+import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -18,7 +19,7 @@ public interface Graph {
 
     List<Integer> getNeighbors(int v);
 
-    void readFromTerminal();  // чтение с терминала
+    void readFromTerminal(InputStream inputStream);  // чтение с терминала
 
     boolean equals(Object obj);
 

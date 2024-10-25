@@ -92,7 +92,7 @@ class IncidenceMatrixGraphTest {
 
         Exception exception = assertThrows(IllegalStateException.class,
                 () -> graph.topologicalSort());
-        assertEquals("Граф содержит цикл, топ сорт невозможна", exception.getMessage(),
+        assertEquals("Граф содержит цикл, топологическая сортировка невозможна", exception.getMessage(),
                 "Топологическая сортировка должна выбросить исключение при наличии цикла");
     }
 
