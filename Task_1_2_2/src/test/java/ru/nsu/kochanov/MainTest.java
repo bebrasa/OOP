@@ -1,6 +1,8 @@
 package ru.nsu.kochanov;
 
-import static org.junit.jupiter.api.Assertions.*;
+/**
+ * This test class for testing main class.
+ */
 
 class MainTest {
 

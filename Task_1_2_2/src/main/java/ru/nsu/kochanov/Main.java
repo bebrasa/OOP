@@ -1,5 +1,9 @@
 package ru.nsu.kochanov;
 
+/**
+ * This javadoc for main class in my program.
+ */
+
 public class Main {
     public static void main(String[] args) {
         HashTable<String, Number> hashTable = new HashTable<>();

@@ -4,6 +4,10 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.ConcurrentModificationException;
 
+/**
+ * This class is Iterator for hashtable.
+ */
+
 public class HashTableIterator<K, V> implements Iterator<Entry<K, V>> {
     private final HashTable<K, V> hashTable;
     private int bucketIndex = 0;
