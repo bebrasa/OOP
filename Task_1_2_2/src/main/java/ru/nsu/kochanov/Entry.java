@@ -22,8 +22,12 @@ public class Entry<K, V> {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
         Entry<?, ?> entry = (Entry<?, ?>) obj;
         return Objects.equals(key, entry.key) && Objects.equals(value, entry.value);
     }

@@ -6,10 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 
 /**
  * This test class for testing hashtable class.
@@ -31,7 +32,8 @@ class HashTableTest {
 
         assertEquals(1, hashTable.get("key1"));
         assertEquals(2, hashTable.get("key2"));
-        assertNull(hashTable.get("nonExistingKey"), "Getting a non-existing key should return null");
+        assertNull(hashTable.get("nonExistingKey"), "Getting"
+                + " a non-existing key should return null");
     }
 
     @Test
@@ -39,7 +41,8 @@ class HashTableTest {
         hashTable.put("key1", 1);
         hashTable.put("key1", 10);
 
-        assertEquals(10, hashTable.get("key1"), "Updating an existing key should overwrite the value");
+        assertEquals(10, hashTable.get("key1"), "Updating"
+                + " an existing key should overwrite the value");
     }
 
     @Test
@@ -47,7 +50,8 @@ class HashTableTest {
         hashTable.put("key1", 1);
 
         assertTrue(hashTable.containsKey("key1"));
-        assertFalse(hashTable.containsKey("nonExistingKey"), "containsKey should return false for non-existing key");
+        assertFalse(hashTable.containsKey("nonExistingKey"), "containsKey"
+                + " should return false for non-existing key");
     }
 
     @Test
@@ -55,7 +59,8 @@ class HashTableTest {
         hashTable.put("key1", 1);
         hashTable.put("key2", 2);
 
-        assertEquals(1, hashTable.remove("key1"), "remove should return the value of the removed key");
+        assertEquals(1, hashTable.remove("key1"), "remove"
+                + " should return the value of the removed key");
         assertNull(hashTable.get("key1"), "Removed key should no longer be accessible");
         assertEquals(1, hashTable.size(), "Size should be updated after remove operation");
     }
@@ -67,10 +72,12 @@ class HashTableTest {
         hashTable.put("key1", 1);
         hashTable.put("key2", 2);
 
-        assertEquals(2, hashTable.size(), "Size should reflect the number of entries in the table");
+        assertEquals(2, hashTable.size(), "Size should"
+                + " reflect the number of entries in the table");
 
         hashTable.remove("key1");
-        assertEquals(1, hashTable.size(), "Size should be updated after removing an element");
+        assertEquals(1, hashTable.size(), "Size should be "
+                + "updated after removing an element");
     }
 
     @Test
@@ -79,11 +86,14 @@ class HashTableTest {
             hashTable.put("key" + i, i);
         }
 
-        assertEquals(13, hashTable.size(), "Size should match the number of added elements after rehashing");
-        assertEquals(16 * 2, hashTable.table.length, "Table size should double after reaching the load factor limit");
+        assertEquals(13, hashTable.size(), "Size"
+                + " should match the number of added elements after rehashing");
+        assertEquals(16 * 2, hashTable.table.length, "Table size"
+                + " should double after reaching the load factor limit");
 
         for (int i = 1; i <= 13; i++) {
-            assertEquals(i, hashTable.get("key" + i), "Values should be preserved after rehashing");
+            assertEquals(i, hashTable.get("key" + i), "Values"
+                    + " should be preserved after rehashing");
         }
     }
 
@@ -109,7 +119,8 @@ class HashTableTest {
         assertEquals("key3", entry3.key);
         assertEquals(3, entry3.value);
 
-        assertFalse(iterator.hasNext(), "Iterator should not have elements after all entries are visited");
+        assertFalse(iterator.hasNext(), "Iterator"
+                + " should not have elements after all entries are visited");
     }
 
     @Test
@@ -119,7 +130,9 @@ class HashTableTest {
 
         hashTable.put("key2", 2); // Modify hashTable after creating iterator
 
-        assertThrows(ConcurrentModificationException.class, iterator::next, "Modifying hashTable after iterator creation should throw ConcurrentModificationException on next()");
+        assertThrows(ConcurrentModificationException.class, iterator::next, "Modifying"
+                + " hashTable after iterator creation should throw"
+                + " ConcurrentModificationException on next()");
     }
 
     @Test
@@ -131,7 +144,9 @@ class HashTableTest {
         otherHashTable.put("key1", 1);
         otherHashTable.put("key2", 2);
 
-        assertTrue(hashTable.equals(otherHashTable), "HashTables with same key-value pairs should be equal");
-        assertEquals("{key1=1, key2=2}", hashTable.toString(), "toString should display all entries in 'key=value' format");
+        assertTrue(hashTable.equals(otherHashTable), "HashTables"
+                + " with same key-value pairs should be equal");
+        assertEquals("{key1=1, key2=2}", hashTable.toString(), "toString"
+                + " should display all entries in 'key=value' format");
     }
 }

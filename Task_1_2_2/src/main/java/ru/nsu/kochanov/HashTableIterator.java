@@ -1,8 +1,9 @@
 package ru.nsu.kochanov;
 
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 import java.util.ConcurrentModificationException;
+import java.util.NoSuchElementException;
+
 
 /**
  * This class is Iterator for hashtable.
@@ -15,6 +16,9 @@ public class HashTableIterator<K, V> implements Iterator<Entry<K, V>> {
     private int expectedModCount;
     private Entry<K, V> nextEntry;
 
+    /**
+     * javadoc.
+     */
     public HashTableIterator(HashTable<K, V> hashTable) {
         this.hashTable = hashTable;
         this.expectedModCount = hashTable.modCount;
@@ -25,7 +29,8 @@ public class HashTableIterator<K, V> implements Iterator<Entry<K, V>> {
         nextEntry = null;
         entryIndex++;
         while (bucketIndex < hashTable.table.length) {
-            if (hashTable.table[bucketIndex] != null && entryIndex < hashTable.table[bucketIndex].size()) {
+            if (hashTable.table[bucketIndex] != null
+                    && entryIndex < hashTable.table[bucketIndex].size()) {
                 nextEntry = hashTable.table[bucketIndex].get(entryIndex);
                 break;
             }

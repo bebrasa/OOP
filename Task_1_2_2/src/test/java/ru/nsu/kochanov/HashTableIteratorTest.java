@@ -1,14 +1,15 @@
 package ru.nsu.kochanov;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import java.util.ConcurrentModificationException;
 import java.util.NoSuchElementException;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 
 
 
@@ -46,7 +47,8 @@ class HashTableIteratorTest {
         assertEquals("key3", entry3.key);
         assertEquals(3, entry3.value);
 
-        assertFalse(iterator.hasNext(), "Iterator should not have elements after all entries are visited");
+        assertFalse(iterator.hasNext(), "Iterator should not have elements"
+                + " after all entries are visited");
     }
 
     @Test
@@ -59,7 +61,8 @@ class HashTableIteratorTest {
         iterator.next();
 
         // Проверка, что вызов next() после окончания элементов вызывает исключение
-        assertThrows(NoSuchElementException.class, iterator::next, "Calling next() with no elements left should throw NoSuchElementException");
+        assertThrows(NoSuchElementException.class, iterator::next, "Calling "
+                + "next() with no elements left should throw NoSuchElementException");
     }
 
     @Test
@@ -68,7 +71,9 @@ class HashTableIteratorTest {
 
         hashTable.put("key4", 4); // Модифицируем таблицу после создания итератора
 
-        assertThrows(ConcurrentModificationException.class, iterator::next, "Modifying hashTable after iterator creation should throw ConcurrentModificationException on next()");
+        assertThrows(ConcurrentModificationException.class, iterator::next, "Modifying "
+                + "hashTable after iterator creation should throw "
+                + "ConcurrentModificationException on next()");
     }
 
     @Test
@@ -76,7 +81,9 @@ class HashTableIteratorTest {
         HashTable<String, Integer> emptyHashTable = new HashTable<>();
         HashTableIterator<String, Integer> iterator = new HashTableIterator<>(emptyHashTable);
 
-        assertFalse(iterator.hasNext(), "Iterator on empty hash table should not have elements");
-        assertThrows(NoSuchElementException.class, iterator::next, "Calling next() on empty hash table should throw NoSuchElementException");
+        assertFalse(iterator.hasNext(), "Iterator on"
+                + " empty hash table should not have elements");
+        assertThrows(NoSuchElementException.class, iterator::next, "Calling"
+                + " next() on empty hash table should throw NoSuchElementException");
     }
 }

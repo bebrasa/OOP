@@ -5,6 +5,9 @@ package ru.nsu.kochanov;
  */
 
 public class Main {
+    /**
+     * javadoc.
+     */
     public static void main(String[] args) {
         HashTable<String, Number> hashTable = new HashTable<>();
         hashTable.put("one", 1);
