@@ -24,8 +24,7 @@ public class AdjacencyListGraph implements Graph {
     @Override
     public void removeVertex(int v) {
         adjList.remove(v);
-        for (List<Integer> neighbours : adjList.values())
-        {
+        for (List<Integer> neighbours : adjList.values()) {
             neighbours.remove(Integer.valueOf(v));
         }
     }
