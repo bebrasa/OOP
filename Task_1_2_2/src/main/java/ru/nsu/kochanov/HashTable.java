@@ -30,6 +30,9 @@ public class HashTable<K, V> implements Iterable<Entry<K, V>> {
         return Math.abs(key.hashCode() % table.length);
     }
 
+    /**
+     * javadoc.
+     */
     public void put(K key, V value) {
         int index = hash(key);
         if (table[index] == null) {
@@ -76,6 +79,7 @@ public class HashTable<K, V> implements Iterable<Entry<K, V>> {
     public boolean containsKey(K key) {
         return get(key) != null;
     }
+
     /**
      * javadoc.
      */
@@ -89,8 +93,8 @@ public class HashTable<K, V> implements Iterable<Entry<K, V>> {
         while (iterator.hasNext()) {
             Entry<K, V> entry = iterator.next();
             if (entry.key.equals(key)) {
-                V value = entry.value;
                 iterator.remove();
+                V value = entry.value;
                 size--;
                 modCount++;
                 return value;
@@ -98,18 +102,21 @@ public class HashTable<K, V> implements Iterable<Entry<K, V>> {
         }
         return null;
     }
+
     /**
      * javadoc.
      */
     public void update(K key, V value) {
         put(key, value);
     }
+
     /**
      * javadoc.
      */
     public int size() {
         return size;
     }
+
     /**
      * javadoc.
      */
@@ -127,6 +134,7 @@ public class HashTable<K, V> implements Iterable<Entry<K, V>> {
             }
         }
     }
+
     /**
      * javadoc.
      */
@@ -134,6 +142,7 @@ public class HashTable<K, V> implements Iterable<Entry<K, V>> {
     public Iterator<Entry<K, V>> iterator() {
         return new HashTableIterator<>(this);
     }
+
     /**
      * javadoc.
      */
@@ -150,6 +159,7 @@ public class HashTable<K, V> implements Iterable<Entry<K, V>> {
         }
         return true;
     }
+    
     /**
      * javadoc.
      */
