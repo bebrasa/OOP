@@ -102,8 +102,12 @@ public class IncidenceMatrixGraph implements Graph {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         IncidenceMatrixGraph that = (IncidenceMatrixGraph) o;
         return numVertices == that.numVertices && numEdges == that.numEdges
                 && edgeCount == that.edgeCount
@@ -163,7 +167,8 @@ public class IncidenceMatrixGraph implements Graph {
         }
 
         if (sorted.size() != numVertices) {
-            throw new IllegalStateException("Граф содержит цикл, топологическая сортировка невозможна");
+            throw new IllegalStateException("Граф содержит цикл,"
+                    + " топологическая сортировка невозможна");
         }
 
         return sorted;
