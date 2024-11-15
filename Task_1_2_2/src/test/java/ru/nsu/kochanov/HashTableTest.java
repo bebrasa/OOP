@@ -128,11 +128,10 @@ class HashTableTest {
         hashTable.put("key1", 1);
         Iterator<Entry<String, Integer>> iterator = hashTable.iterator();
 
-        hashTable.put("key2", 2); // Modify hashTable after creating iterator
+        hashTable.put("key2", 2); // модиф после итератора
 
         assertThrows(ConcurrentModificationException.class, iterator::next, "Modifying"
-                + " hashTable after iterator creation should throw"
-                + " ConcurrentModificationException on next()");
+                + " hashTable after iterator creation");
     }
 
     @Test

@@ -69,11 +69,10 @@ class HashTableIteratorTest {
     void testConcurrentModificationException() {
         HashTableIterator<String, Integer> iterator = new HashTableIterator<>(hashTable);
 
-        hashTable.put("key4", 4); // Модифицируем таблицу после создания итератора
+        hashTable.put("key4", 4); // модифицруем таблицу после создания итератора
 
         assertThrows(ConcurrentModificationException.class, iterator::next, "Modifying "
-                + "hashTable after iterator creation should throw "
-                + "ConcurrentModificationException on next()");
+                + "hashTable after iterator creation);
     }
 
     @Test

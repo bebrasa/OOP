@@ -62,7 +62,7 @@ public class HashTable<K, V> implements Iterable<Entry<K, V>> {
     public V get(K key) {
         int index = hash(key);
         if (table[index] == null) {
-            return null;
+            throw new NoSuchElementException;
         }
 
         for (Entry<K, V> entry : table[index]) {
@@ -70,7 +70,7 @@ public class HashTable<K, V> implements Iterable<Entry<K, V>> {
                 return entry.value;
             }
         }
-        return null;
+        throw new NoSuchElementException;
     }
 
     /**
