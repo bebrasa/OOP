@@ -124,17 +124,6 @@ class HashTableTest {
     }
 
     @Test
-    void testConcurrentModificationException() {
-        hashTable.put("key1", 1);
-        Iterator<Entry<String, Integer>> iterator = hashTable.iterator();
-
-        hashTable.put("key2", 2); // модиф после итератора
-
-        assertThrows(ConcurrentModificationException.class, iterator::next, "Modifying"
-                + " hashTable after iterator creation");
-    }
-
-    @Test
     void testEqualsAndToString() {
         HashTable<String, Integer> otherHashTable = new HashTable<>();
         hashTable.put("key1", 1);
@@ -147,5 +136,16 @@ class HashTableTest {
                 + " with same key-value pairs should be equal");
         assertEquals("{key1=1, key2=2}", hashTable.toString(), "toString"
                 + " should display all entries in 'key=value' format");
+    }
+
+    @Test
+    void testConcurrentModificationException() {
+        hashTable.put("key1", 1);
+        Iterator<Entry<String, Integer>> iterator = hashTable.iterator();
+
+        hashTable.put("key2", 2); // модиф после итератора
+
+        assertThrows(ConcurrentModificationException.class, iterator::next, "Modifying"
+                + " hashTable after iterator creation");
     }
 }

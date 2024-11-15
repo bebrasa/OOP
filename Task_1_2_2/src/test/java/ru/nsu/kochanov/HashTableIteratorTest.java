@@ -66,16 +66,6 @@ class HashTableIteratorTest {
     }
 
     @Test
-    void testConcurrentModificationException() {
-        HashTableIterator<String, Integer> iterator = new HashTableIterator<>(hashTable);
-
-        hashTable.put("key4", 4); // модифицруем таблицу после создания итератора
-
-        assertThrows(ConcurrentModificationException.class, iterator::next, "Modifying "
-                + "hashTable after iterator creation);
-    }
-
-    @Test
     void testEmptyTable() {
         HashTable<String, Integer> emptyHashTable = new HashTable<>();
         HashTableIterator<String, Integer> iterator = new HashTableIterator<>(emptyHashTable);
@@ -84,5 +74,15 @@ class HashTableIteratorTest {
                 + " empty hash table should not have elements");
         assertThrows(NoSuchElementException.class, iterator::next, "Calling"
                 + " next() on empty hash table should throw NoSuchElementException");
+    }
+
+    @Test
+    void testConcurrentModificationException() {
+        HashTableIterator<String, Integer> iterator = new HashTableIterator<>(hashTable);
+
+        hashTable.put("key4", 4); // модифицруем таблицу после создания итератора
+
+        assertThrows(ConcurrentModificationException.class, iterator::next, "Modifying "
+                + "hashTable after iterator creation);
     }
 }
