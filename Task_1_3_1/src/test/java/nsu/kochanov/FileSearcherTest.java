@@ -3,6 +3,8 @@ package nsu.kochanov;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.FileOutputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -25,9 +27,9 @@ class FileSearcherTest {
         }
 
         FileSearcher searcher = new FileSearcher(tempFile.getAbsolutePath(), "бра");
-        List<Integer> occurrences = searcher.findOccurrences();
+        List<Long> occurrences = searcher.findOccurrences();
 
-        assertEquals(List.of(1, 8), occurrences);
+        assertEquals(List.of(1L, 8L), occurrences);
     }
 
     @Test
@@ -41,7 +43,7 @@ class FileSearcherTest {
         }
 
         FileSearcher searcher = new FileSearcher(tempFile.getAbsolutePath(), "тест");
-        List<Integer> occurrences = searcher.findOccurrences();
+        List<Long> occurrences = searcher.findOccurrences();
 
         assertTrue(occurrences.isEmpty());
     }
@@ -57,9 +59,9 @@ class FileSearcherTest {
         }
 
         FileSearcher searcher = new FileSearcher(tempFile.getAbsolutePath(), "aaa");
-        List<Integer> occurrences = searcher.findOccurrences();
+        List<Long> occurrences = searcher.findOccurrences();
 
-        assertEquals(List.of(0, 1, 2, 3), occurrences);
+        assertEquals(List.of(0L, 1L, 2L, 3L), occurrences);
     }
 
     @Test
@@ -68,7 +70,7 @@ class FileSearcherTest {
         tempFile.deleteOnExit();
 
         FileSearcher searcher = new FileSearcher(tempFile.getAbsolutePath(), "бра");
-        List<Integer> occurrences = searcher.findOccurrences();
+        List<Long> occurrences = searcher.findOccurrences();
 
         assertTrue(occurrences.isEmpty());
     }
@@ -87,31 +89,34 @@ class FileSearcherTest {
         }
 
         FileSearcher searcher = new FileSearcher(tempFile.getAbsolutePath(), "даб");
-        List<Integer> occurrences = searcher.findOccurrences();
+        List<Long> occurrences = searcher.findOccurrences();
 
-        assertEquals(10000, occurrences.size());
+        assertEquals(10000L, occurrences.size());
     }
+
     @Test
     void testFindOccurrencesInLargeFile() throws IOException {
         File tempFile = File.createTempFile("largeTestFile", ".txt");
         tempFile.deleteOnExit();
 
-        StringBuilder contentBuilder = new StringBuilder();
-        String pattern = "testPattern";
-        int repeatCount = 1_000_000;
-        for (int i = 0; i < repeatCount; i++) {
-            contentBuilder.append(pattern).append(" ");
-        }
-        try (FileWriter writer = new FileWriter(tempFile)) {
-            writer.write(contentBuilder.toString());
+        String pattern = "😃😃😃😃😃😃😃😃😃😃😇";
+        int patternLength = pattern.length();
+
+        try (BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(tempFile))) {
+            for (long i = 0; i < 5_000_0000; i++) {
+                outputStream.write(pattern.getBytes());
+                outputStream.write(' ');
+            }
         }
 
-        FileSearcher fileSearcher = new FileSearcher(tempFile.getAbsolutePath(), "testPattern");
-        List<Integer> occurrences = fileSearcher.findOccurrences();
-        
-        assertEquals(repeatCount, occurrences.size());
-        for (int i = 0; i < repeatCount; i++) {
-            assertEquals(i * (pattern.length() + 1), occurrences.get(i));
+        FileSearcher fileSearcher = new FileSearcher(tempFile.getAbsolutePath(), pattern);
+        List<Long> occurrences = fileSearcher.findOccurrences();
+
+        assertEquals(5_000_000, occurrences.size());
+
+        for (long i = 0; i < 5_000_000; i++) {
+            assertEquals(i * (patternLength + 1), occurrences.get((int) i).longValue());
         }
     }
+
 }

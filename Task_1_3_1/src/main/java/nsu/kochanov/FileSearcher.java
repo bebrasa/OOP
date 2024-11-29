@@ -26,12 +26,12 @@ public class FileSearcher {
     /**
      * This is java.
      */
-    public List<Integer> findOccurrences() throws IOException {
-        List<Integer> occurrences = new ArrayList<>();
+    public List<Long> findOccurrences() throws IOException {
+        List<Long> occurrences = new ArrayList<>();
         int bufferSize = searchString.length();
         StringBuilder buffer = new StringBuilder();
 
-        int index = 0;
+        long index = 0;
         int readChar;
 
         // Инициализируем буфер

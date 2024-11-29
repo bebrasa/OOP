@@ -17,7 +17,7 @@ public class Main {
 
         FileSearcher fileSearcher = new FileSearcher(fileName, searchString);
         try {
-            List<Integer> occurrences = fileSearcher.findOccurrences();
+            List<Long> occurrences = fileSearcher.findOccurrences();
             System.out.println("Occurrences: " + occurrences);
         } catch (IOException e) {
             e.printStackTrace();
