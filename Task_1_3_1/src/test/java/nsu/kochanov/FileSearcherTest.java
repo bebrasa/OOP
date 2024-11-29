@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 

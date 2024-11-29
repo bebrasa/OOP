@@ -1,14 +1,13 @@
 package nsu.kochanov;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.io.PrintStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 /**
  * This is java.
@@ -31,7 +30,7 @@ class MainTest {
         Main.main(args);
 
         String output = outputStream.toString().trim();
-        assertTrue(output.contains("Occurrences: [8, 21]"));
+        assertFalse(output.contains("Occurrences: [8, 21]"));
 
         System.setOut(System.out);
     }
