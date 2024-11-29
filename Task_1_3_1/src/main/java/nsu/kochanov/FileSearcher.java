@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This is java.
+ */
 public class FileSearcher {
     private final FileReader fileReader;
     private final String searchString;
@@ -17,6 +20,9 @@ public class FileSearcher {
         this.searchString = searchString;
     }
 
+    /**
+     * This is java.
+     */
     public List<Integer> findOccurrences() throws IOException {
         List<Integer> occurrences = new ArrayList<>();
         int bufferSize = searchString.length();

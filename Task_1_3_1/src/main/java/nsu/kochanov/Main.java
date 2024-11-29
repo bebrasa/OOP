@@ -3,10 +3,13 @@ package nsu.kochanov;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * This is main class in my program.
+ */
 public class Main {
     public static void main(String[] args) {
         String fileName = "input.txt";
-        String searchString = "бра";
+        String searchString = "\uD83D\uDE00";
 
         FileSearcher fileSearcher = new FileSearcher(fileName, searchString);
         try {
