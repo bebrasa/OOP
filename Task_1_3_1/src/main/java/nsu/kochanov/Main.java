@@ -7,9 +7,13 @@ import java.util.List;
  * This is main class in my program.
  */
 public class Main {
+
+    /**
+     * This is java.
+     */
     public static void main(String[] args) {
         String fileName = "input.txt";
-        String searchString = "\uD83D\uDE00";
+        String searchString = "ami";
 
         FileSearcher fileSearcher = new FileSearcher(fileName, searchString);
         try {

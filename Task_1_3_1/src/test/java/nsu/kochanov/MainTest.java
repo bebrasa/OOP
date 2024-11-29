@@ -1,8 +1,38 @@
 package nsu.kochanov;
 
+import org.junit.jupiter.api.Test;
+
+import java.io.PrintStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import static org.junit.jupiter.api.Assertions.*;
+
 /**
- * This class is testing main class.
+ * This is java.
  */
 class MainTest {
 
+    @Test
+    void testMainWithEmojiSearch() throws IOException {
+        File tempFile = File.createTempFile("testFile", ".txt");
+        tempFile.deleteOnExit();
+        String fileContent = "Привет! \uD83D\uDE00 Как дела? \uD83D\uDE00";
+        try (FileWriter writer = new FileWriter(tempFile)) {
+            writer.write(fileContent);
+        }
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+
+        String[] args = {tempFile.getAbsolutePath(), "\uD83D\uDE00"};
+        Main.main(args);
+
+        String output = outputStream.toString().trim();
+        assertTrue(output.contains("Occurrences: [8, 21]"));
+
+        System.setOut(System.out);
+    }
 }

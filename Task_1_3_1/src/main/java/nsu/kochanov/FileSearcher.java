@@ -11,6 +11,9 @@ public class FileSearcher {
     private final FileReader fileReader;
     private final String searchString;
 
+    /**
+     * This is javadoc.
+     */
     public FileSearcher(String fileName, String searchString) {
         try {
             this.fileReader = new FileReader(fileName);
@@ -34,7 +37,9 @@ public class FileSearcher {
         // Инициализируем буфер
         for (int i = 0; i < bufferSize; i++) {
             readChar = fileReader.readNextChar();
-            if (readChar == -1) break;
+            if (readChar == -1) {
+                break;
+            }
             buffer.append((char) readChar);
         }
 

@@ -13,7 +13,8 @@ public class FileReader {
     private final BufferedReader reader;
 
     public FileReader(String fileName) throws IOException {
-        this.reader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName), StandardCharsets.UTF_8));
+        this.reader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName),
+                StandardCharsets.UTF_8));
     }
 
     /**
