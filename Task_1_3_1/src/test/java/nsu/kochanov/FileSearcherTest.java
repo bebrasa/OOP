@@ -91,4 +91,27 @@ class FileSearcherTest {
 
         assertEquals(10000, occurrences.size());
     }
+    @Test
+    void testFindOccurrencesInLargeFile() throws IOException {
+        File tempFile = File.createTempFile("largeTestFile", ".txt");
+        tempFile.deleteOnExit();
+
+        StringBuilder contentBuilder = new StringBuilder();
+        String pattern = "testPattern";
+        int repeatCount = 1_000_000;
+        for (int i = 0; i < repeatCount; i++) {
+            contentBuilder.append(pattern).append(" ");
+        }
+        try (FileWriter writer = new FileWriter(tempFile)) {
+            writer.write(contentBuilder.toString());
+        }
+
+        FileSearcher fileSearcher = new FileSearcher(tempFile.getAbsolutePath(), "testPattern");
+        List<Integer> occurrences = fileSearcher.findOccurrences();
+        
+        assertEquals(repeatCount, occurrences.size());
+        for (int i = 0; i < repeatCount; i++) {
+            assertEquals(i * (pattern.length() + 1), occurrences.get(i));
+        }
+    }
 }
