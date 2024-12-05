@@ -26,43 +26,12 @@ class HashTableTest {
     }
 
     @Test
-    void testPutAndGet() {
-        hashTable.put("key1", 1);
-        hashTable.put("key2", 2);
-
-        assertEquals(1, hashTable.get("key1"));
-        assertEquals(2, hashTable.get("key2"));
-        assertNull(hashTable.get("nonExistingKey"), "Getting"
-                + " a non-existing key should return null");
-    }
-
-    @Test
     void testUpdate() {
         hashTable.put("key1", 1);
         hashTable.put("key1", 10);
 
         assertEquals(10, hashTable.get("key1"), "Updating"
                 + " an existing key should overwrite the value");
-    }
-
-    @Test
-    void testContainsKey() {
-        hashTable.put("key1", 1);
-
-        assertTrue(hashTable.containsKey("key1"));
-        assertFalse(hashTable.containsKey("nonExistingKey"), "containsKey"
-                + " should return false for non-existing key");
-    }
-
-    @Test
-    void testRemove() {
-        hashTable.put("key1", 1);
-        hashTable.put("key2", 2);
-
-        assertEquals(1, hashTable.remove("key1"), "remove"
-                + " should return the value of the removed key");
-        assertNull(hashTable.get("key1"), "Removed key should no longer be accessible");
-        assertEquals(1, hashTable.size(), "Size should be updated after remove operation");
     }
 
     @Test

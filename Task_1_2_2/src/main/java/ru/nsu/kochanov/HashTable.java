@@ -2,6 +2,7 @@ package ru.nsu.kochanov;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 
 /**
@@ -62,7 +63,7 @@ public class HashTable<K, V> implements Iterable<Entry<K, V>> {
     public V get(K key) {
         int index = hash(key);
         if (table[index] == null) {
-            throw new NoSuchElementException;
+            throw new NoSuchElementException();
         }
 
         for (Entry<K, V> entry : table[index]) {
@@ -70,7 +71,7 @@ public class HashTable<K, V> implements Iterable<Entry<K, V>> {
                 return entry.value;
             }
         }
-        throw new NoSuchElementException;
+        throw new NoSuchElementException();
     }
 
     /**
@@ -84,7 +85,7 @@ public class HashTable<K, V> implements Iterable<Entry<K, V>> {
      * javadoc.
      */
     public V remove(K key) {
-        int index = hash(key);
+        int index =  hash(key);
         if (table[index] == null) {
             return null;
         }

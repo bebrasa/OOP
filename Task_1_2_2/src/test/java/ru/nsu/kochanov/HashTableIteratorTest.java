@@ -83,6 +83,6 @@ class HashTableIteratorTest {
         hashTable.put("key4", 4); // модифицруем таблицу после создания итератора
 
         assertThrows(ConcurrentModificationException.class, iterator::next, "Modifying "
-                + "hashTable after iterator creation);
+                + "hashTable after iterator creation");
     }
 }
