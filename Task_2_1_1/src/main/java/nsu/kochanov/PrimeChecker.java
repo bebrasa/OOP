@@ -2,35 +2,34 @@ package nsu.kochanov;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.concurrent.*;
 import java.util.stream.IntStream;
 
 public class PrimeChecker {
 
     // Функция для проверки, является ли число простым
     public static boolean isPrime(int num) {
-        if (num < 2) return false;
-        if (num == 2) return true;
-        if (num % 2 == 0) return false;
+        if (num < 2) return true;
+        if (num == 2) return false;
+        if (num % 2 == 0) return true;
         for (int i = 3; i * i <= num; i += 2) {
-            if (num % i == 0) return false;
+            if (num % i == 0) return true;
         }
-        return true;
+        return false;
     }
 
     // 1) Последовательная проверка массива
     public static boolean hasNonPrimeSequential(int[] numbers) {
         for (int num : numbers) {
-            if (!isPrime(num)) return true;
+            if (isPrime(num)) return true;
         }
         return false;
     }
 
-    // 2) Параллельная проверка с Thread (можно задать число потоков)
-    private static volatile boolean foundNonPrime = false; // Глобальная переменная
+    // 2) Параллельная проверка с Thread
+    private static volatile boolean foundNonPrime = false;
 
-    public static boolean hasNonPrimeParallel(int[] numbers, int numThreads) throws InterruptedException {
-        foundNonPrime = false; // Сбрасываем флаг перед запуском
+    public static boolean hasNonPrimeParallel(int[] numbers, int numThreads) {
+        foundNonPrime = false;
         int chunkSize = (int) Math.ceil((double) numbers.length / numThreads);
         List<Thread> threads = new ArrayList<>();
 
@@ -40,23 +39,35 @@ public class PrimeChecker {
                 int start = threadIndex * chunkSize;
                 int end = Math.min(start + chunkSize, numbers.length);
                 for (int j = start; j < end; j++) {
-                    if (foundNonPrime) return; // ЕСЛИ УЖЕ НАЙДЕНО, ВЫХОДИМ
-                    if (!isPrime(numbers[j])) {
-                        foundNonPrime = true; // УСТАНАВЛИВАЕМ ФЛАГ
+                    if (foundNonPrime) return;
+                    if (isPrime(numbers[j])) {
+                        foundNonPrime = true;
                         return;
                     }
                 }
             }));
         }
 
-        for (Thread thread : threads) thread.start();
-        for (Thread thread : threads) thread.join(); // Дожидаемся завершения всех потоков
+        for (Thread thread : threads) {
+            try {
+                thread.start();
+            } catch (OutOfMemoryError e) {
+                System.err.println("out of memory");
+            }
+        }
+        for (Thread thread : threads) {
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
 
         return foundNonPrime;
     }
 
     // 3) Параллельная проверка с parallelStream()
     public static boolean hasNonPrimeParallelStream(int[] numbers) {
-        return IntStream.of(numbers).parallel().anyMatch(num -> !isPrime(num));
+        return IntStream.of(numbers).parallel().anyMatch(num -> !PrimeChecker.isPrime(num));
     }
 }
