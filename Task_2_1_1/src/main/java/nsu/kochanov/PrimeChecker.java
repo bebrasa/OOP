@@ -4,29 +4,50 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
+/**
+ * This is javadoc for prime checker.
+ */
+
 public class PrimeChecker {
 
-    // Функция для проверки, является ли число простым
+    /**
+     * This func checks number is prime or not.
+     */
     public static boolean isPrime(int num) {
-        if (num < 2) return false;
-        if (num == 2) return true;
-        if (num % 2 == 0) return false;
+        if (num < 2) {
+            return false;
+        }
+        if (num == 2) {
+            return true;
+        }
+        if (num % 2 == 0) {
+            return false;
+        }
         for (int i = 3; i * i <= num; i += 2) {
-            if (num % i == 0) return false;
+            if (num % i == 0) {
+                return false;
+            }
         }
         return true;
     }
 
-    // 1) Последовательная проверка массива
+    /**
+     * Slow checking.
+     */
     public static boolean hasNonPrimeSequential(int[] numbers) {
         for (int num : numbers) {
-            if (isPrime(num)) return true;
+            if (isPrime(num)) {
+                return true;
+            }
         }
         return false;
     }
 
-    // 2) Параллельная проверка с Thread
     private static volatile boolean foundNonPrime = false;
+
+    /**
+     * Check with threads.
+     */
 
     public static boolean hasNonPrimeParallel(int[] numbers, int numThreads) {
         foundNonPrime = false;
@@ -39,7 +60,9 @@ public class PrimeChecker {
                 int start = threadIndex * chunkSize;
                 int end = Math.min(start + chunkSize, numbers.length);
                 for (int j = start; j < end; j++) {
-                    if (foundNonPrime) return;
+                    if (foundNonPrime) {
+                        return;
+                    }
                     if (isPrime(numbers[j])) {
                         foundNonPrime = true;
                         return;
@@ -66,7 +89,9 @@ public class PrimeChecker {
         return foundNonPrime;
     }
 
-    // 3) Параллельная проверка с parallelStream()
+    /**
+     * Very fast checking.
+     */
     public static boolean hasNonPrimeParallelStream(int[] numbers) {
         return IntStream.of(numbers).parallel().anyMatch(num -> !PrimeChecker.isPrime(num));
     }
