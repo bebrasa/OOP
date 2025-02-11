@@ -1,20 +1,20 @@
 package nsu.kochanov;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.IntStream;
 
 public class PrimeChecker {
 
     // Функция для проверки, является ли число простым
     public static boolean isPrime(int num) {
-        if (num < 2) return true;
-        if (num == 2) return false;
-        if (num % 2 == 0) return true;
+        if (num < 2) return false;
+        if (num == 2) return true;
+        if (num % 2 == 0) return false;
         for (int i = 3; i * i <= num; i += 2) {
-            if (num % i == 0) return true;
+            if (num % i == 0) return false;
         }
-        return false;
+        return true;
     }
 
     // 1) Последовательная проверка массива
