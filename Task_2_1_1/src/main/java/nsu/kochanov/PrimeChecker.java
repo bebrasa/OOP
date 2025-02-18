@@ -36,7 +36,7 @@ public class PrimeChecker {
      */
     public static boolean hasNonPrimeSequential(int[] numbers) {
         for (int num : numbers) {
-            if (isPrime(num)) {
+            if (!isPrime(num)) {
                 return true;
             }
         }
