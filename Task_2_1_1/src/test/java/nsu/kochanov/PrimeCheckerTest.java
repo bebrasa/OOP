@@ -21,7 +21,7 @@ class PrimeCheckerTest {
         int[] allPrimes = {2, 3, 5, 7, 11};
         int[] hasNonPrime = {2, 4, 5, 7, 11};
 
-        assertTrue(PrimeChecker.hasNonPrimeSequential(allPrimes));
+        assertFalse(PrimeChecker.hasNonPrimeSequential(allPrimes));
         assertTrue(PrimeChecker.hasNonPrimeSequential(hasNonPrime));
     }
 
