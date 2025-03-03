@@ -1,0 +1,7 @@
+{
+  "numBakers": 3,
+  "numCouriers": 2,
+  "warehouseCapacity": 10,
+  "bakerSpeeds": [5, 7, 6],
+  "courierCapacities": [3, 5]
+}
