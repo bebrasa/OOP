@@ -3,34 +3,41 @@ package nsu.kochanov;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class Warehouse {
-    private final int capacity;
+/**
+ * Javadoc.
+ */
+class Warehouse {
     private final Queue<Order> storage = new LinkedList<>();
+    private static final int CAPACITY = 5;
 
-    public Warehouse(int capacity) {
-        this.capacity = capacity;
-    }
-
-    public synchronized void storePizza(Order order) throws InterruptedException {
-        while (storage.size() >= capacity) {
+    /**
+     * Javadoc.
+     */
+    public synchronized void store(Order order) throws InterruptedException {
+        while (storage.size() >= CAPACITY) {
             wait();
         }
-        storage.add(order);
-        System.out.println("Заказ " + order.getOrderId() + " помещен на склад");
+        storage.offer(order);
         notifyAll();
+        System.out.println("[" + order.getId() + "] Готова к доставке");
     }
 
-    public synchronized Order[] retrievePizzas(int maxCount) throws InterruptedException {
+    /**
+     * Javadoc.
+     */
+    public synchronized Order take() throws InterruptedException {
         while (storage.isEmpty()) {
             wait();
         }
-        int count = Math.min(maxCount, storage.size());
-        Order[] orders = new Order[count];
-        for (int i = 0; i < count; i++) {
-            orders[i] = storage.poll();
-            System.out.println("Заказ " + orders[i].getOrderId() + " забран со склада");
-        }
+        Order order = storage.poll();
         notifyAll();
-        return orders;
+        return order;
+    }
+
+    /**
+     * Javadoc.
+     */
+    public synchronized boolean isEmpty() {
+        return storage.isEmpty();
     }
 }

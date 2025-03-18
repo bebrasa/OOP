@@ -1,14 +1,22 @@
 package nsu.kochanov;
 
-public class Order {
-    private static int idCounter = 0;
-    private final int orderId;
+/**
+ * Javadoc.
+ */
+class Order {
+    private int id;
 
-    public Order() {
-        this.orderId = ++idCounter;
+    public Order(int id) {
+        this.id = id;
     }
 
-    public int getOrderId() {
-        return orderId;
+    public Order() {
+    }
+
+    /**
+     * Javadoc.
+     */
+    public int getId() {
+        return id;
     }
 }

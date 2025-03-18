@@ -1,16 +1,17 @@
 package nsu.kochanov;
 
-import java.io.InputStream;
-import java.io.Reader;
 import com.google.gson.Gson;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Reader;
 
+
+/**
+ * Javadoc.
+ */
 public class Config {
     private int numBakers;
     private int numCouriers;
-    private int warehouseCapacity;
-    private int[] bakerSpeeds;
-    private int[] courierCapacities;
 
     public static Config loadConfig(String fileName) {
         Gson gson = new Gson();
@@ -32,7 +33,5 @@ public class Config {
     // Геттеры для полей
     public int getNumBakers() { return numBakers; }
     public int getNumCouriers() { return numCouriers; }
-    public int getWarehouseCapacity() { return warehouseCapacity; }
-    public int[] getBakerSpeeds() { return bakerSpeeds; }
-    public int[] getCourierCapacities() { return courierCapacities; }
+
 }

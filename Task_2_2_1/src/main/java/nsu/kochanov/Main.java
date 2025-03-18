@@ -1,54 +1,24 @@
 package nsu.kochanov;
 
-import java.util.Scanner;
-
+/**
+ * Javadoc.
+ */
 public class Main {
-    public static void main(String[] args) {
-        // Загрузка конфигурации
+    public static void main(String[] args) throws InterruptedException {
         Config config = Config.loadConfig("pizzeria_config.json");
         if (config == null) {
             System.out.println("Ошибка загрузки конфигурации.");
             return;
         }
 
-        // Создание пиццерии
-        Pizzeria pizzeria = new Pizzeria(config);
+        Pizzeria pizzeria = new Pizzeria(config.getNumBakers(), config.getNumCouriers());
 
-        // Запуск потока для генерации заказов
-        Thread orderGenerator = new Thread(() -> {
-            for (int i = 0; i < 1000; i++) {
-                pizzeria.placeOrder(new Order());
-                try {
-                    Thread.sleep(5000); // Добавляем заказ каждые 500 мс
-                } catch (InterruptedException e) {
-                    System.out.println("Генерация заказов остановлена.");
-                    break;
-                }
-            }
-        });
-
-        orderGenerator.start();
-
-        // Запуск пиццерии
-        pizzeria.start();
-
-        // Ожидание команды для завершения работы
-        System.out.println("Введите 'exit' для завершения работы");
-        Scanner scanner = new Scanner(System.in);
-        while (!scanner.nextLine().equalsIgnoreCase("exit")) {
-            System.out.println("Неверная команда");
-        }
-        scanner.close();
-
-        // Остановка генерации заказов
-        orderGenerator.interrupt();
-        try {
-            orderGenerator.join();
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
+        for (int i = 1; i <= 20; i++) {
+            pizzeria.placeOrder(i);
+            Thread.sleep(1500);
         }
 
-        // Остановка пиццерии
+        Thread.sleep(1000);
         pizzeria.stop();
     }
 }

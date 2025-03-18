@@ -1,39 +1,33 @@
 package nsu.kochanov;
 
-public class Baker implements Runnable {
+/**
+ * Javadoc.
+ */
+class Baker implements Runnable {
     private final int id;
-    private final int speed;
-    private final OrderQueue orderQueue;
+    private final OrderQueue queue;
     private final Warehouse warehouse;
-    private boolean running = true;
 
-    public Baker(int id, int speed, OrderQueue orderQueue, Warehouse warehouse) {
+    public Baker(int id, OrderQueue queue, Warehouse warehouse) {
         this.id = id;
-        this.speed = speed;
-        this.orderQueue = orderQueue;
+        this.queue = queue;
         this.warehouse = warehouse;
     }
 
-    public void stop() {
-        running = false;
-    }
-
+    /**
+     * Javadoc.
+     */
     @Override
     public void run() {
-        while (running) {
-            try {
-                Order order = orderQueue.takeOrder();
-                if (order == null) {
-                    break;
-                }
-                System.out.println("Заказ " + order.getOrderId() + " готовится пекарем " + id);
-                Thread.sleep(speed * 1000);
-                System.out.println("Заказ " + order.getOrderId() + " готов пекарем " + id);
-                warehouse.storePizza(order);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                break;
+        try {
+            while (!Thread.interrupted()) {
+                Order order = queue.takeOrder();
+                System.out.println("[" + order.getId() + "] Выпекает пекарь " + id);
+                Thread.sleep(2000);
+                warehouse.store(order);
             }
+        } catch (InterruptedException e) {
+            System.out.println("Пекарь " + id + " завершает работу.");
         }
     }
 }

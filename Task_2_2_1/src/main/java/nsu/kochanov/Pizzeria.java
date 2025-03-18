@@ -1,88 +1,102 @@
 package nsu.kochanov;
 
-import java.util.ArrayList;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.LinkedList;
 
-public class Pizzeria {
-    private final Config config;
-    private final OrderQueue orderQueue = new OrderQueue();
-    private final Warehouse warehouse;
-    private final List<Baker> bakers = new ArrayList<>();
-    private final List<Courier> couriers = new ArrayList<>();
-    private final List<Thread> bakerThreads = new ArrayList<>();
-    private final List<Thread> courierThreads = new ArrayList<>();
+/**
+ * Javadoc.
+ */
+class Pizzeria {
+    private final OrderQueue orderQueue;
+    private final List<Thread> bakers;
+    private final List<Thread> couriers;
+    private volatile boolean isOpen = true;
+    private static final String UNFINISHED_ORDERS_FILE = "unfinished_orders.json";
 
-    public Pizzeria(Config config) {
-        this.config = config;
-        this.warehouse = new Warehouse(config.getWarehouseCapacity());
-        initializeBakers();
-        initializeCouriers();
-    }
 
-    private void initializeBakers() {
-        for (int i = 0; i < config.getNumBakers(); i++) {
-            Baker baker = new Baker(i + 1, config.getBakerSpeeds()[i], orderQueue, warehouse);
+    public Pizzeria(int bakersCount, int couriersCount) {
+        orderQueue = new OrderQueue();
+        Warehouse warehouse = new Warehouse();
+        bakers = new LinkedList<>();
+        couriers = new LinkedList<>();
+
+        loadUnfinishedOrders();
+
+        for (int i = 0; i < bakersCount; i++) {
+            Thread baker = new Thread(new Baker(i + 1, orderQueue, warehouse));
             bakers.add(baker);
+            baker.start();
         }
-    }
 
-    private void initializeCouriers() {
-        for (int i = 0; i < config.getNumCouriers(); i++) {
-            Courier courier = new Courier(i + 1, config.getCourierCapacities()[i], warehouse);
+        for (int i = 0; i < couriersCount; i++) {
+            Thread courier = new Thread(new Courier(i + 1, warehouse));
             couriers.add(courier);
+            courier.start();
         }
     }
 
-    public void start() {
-        // Starting baker threads
-        for (Baker baker : bakers) {
-            Thread bakerThread = new Thread(baker);
-            bakerThreads.add(bakerThread);
-            bakerThread.start();
+    /**
+     * Javadoc.
+     */
+    public void placeOrder(int orderId) {
+        if (!isOpen) {
+            System.out.println("Заказ " + orderId + " не может быть принят, пиццерия закрыта.");
+            return;
         }
-
-        // Starting courier threads
-        for (Courier courier : couriers) {
-            Thread courierThread = new Thread(courier);
-            courierThreads.add(courierThread);
-            courierThread.start();
-        }
+        orderQueue.addOrder(new Order(orderId));
     }
 
+    /**
+     * Javadoc.
+     */
     public void stop() {
-        // Stopping acceptance of new orders
-        orderQueue.stopAcceptingOrders();
+        isOpen = false;
+        System.out.println("Закрытие пиццерии...");
 
-        // Interrupting baker threads
-        for (Thread bakerThread : bakerThreads) {
-            bakerThread.interrupt();
-        }
+        // Прерываем работу потоков
+        bakers.forEach(Thread::interrupt);
+        couriers.forEach(Thread::interrupt);
 
-        // Interrupting courier threads
-        for (Thread courierThread : courierThreads) {
-            courierThread.interrupt();
-        }
+        // Сохраняем незавершенные заказы
+        saveUnfinishedOrders();
+        System.out.println("Пиццерия закрыта.");
+    }
 
-        // Waiting for baker threads to finish
-        for (Thread bakerThread : bakerThreads) {
-            try {
-                bakerThread.join();
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            }
-        }
-
-        // Waiting for courier threads to finish
-        for (Thread courierThread : courierThreads) {
-            try {
-                courierThread.join();
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            }
+    /**
+     * Javadoc.
+     */
+    private void saveUnfinishedOrders() {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            mapper.writeValue(new File(UNFINISHED_ORDERS_FILE), orderQueue.getUnfinishedOrders());
+            System.out.println("Незавершенные заказы сохранены.");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-    public void placeOrder(Order order) {
-        orderQueue.addOrder(order);
+    /**
+     * Javadoc.
+     *
+     * @return
+     */
+    private void loadUnfinishedOrders() {
+        ObjectMapper mapper = new ObjectMapper();
+        File file = new File(UNFINISHED_ORDERS_FILE);
+        if (file.exists()) {
+            try {
+                List<Order> unfinishedOrders = mapper.readValue(file,
+                        mapper.getTypeFactory().constructCollectionType(List.class, Order.class));
+                for (Order order : unfinishedOrders) {
+                    orderQueue.addOrder(order);
+                }
+                System.out.println("Незавершенные заказы загружены.");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

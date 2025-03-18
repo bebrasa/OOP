@@ -1,37 +1,44 @@
 package nsu.kochanov;
 
+import java.util.List;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class OrderQueue {
+/**
+ * Javadoc.
+ */
+class OrderQueue {
     private final Queue<Order> queue = new LinkedList<>();
-    private boolean acceptingOrders = true;
+    private volatile boolean acceptingOrders = true;
 
+    /**
+     * Javadoc.
+     */
     public synchronized void addOrder(Order order) {
         if (!acceptingOrders) {
-            System.out.println("Заказ " + order.getOrderId() + " не может быть добавлен: прием заказов остановлен");
+            System.out.println("[" + order.getId() + "] Заказ не может быть добавлен, "
+                    + "так как пиццерия закрывается.");
             return;
         }
-        queue.add(order);
-        System.out.println("Заказ " + order.getOrderId() + " добавлен в очередь");
+        queue.offer(order);
         notifyAll();
+        System.out.println("[" + order.getId() + "] Добавлен в очередь");
     }
 
+    /**
+     * Javadoc.
+     */
     public synchronized Order takeOrder() throws InterruptedException {
-        while (queue.isEmpty() && acceptingOrders) {
+        while (queue.isEmpty()) {
             wait();
         }
-        if (queue.isEmpty() && !acceptingOrders) {
-            return null; // Возвращаем null, если очередь пуста и прием заказов остановлен
-        }
-        Order order = queue.poll();
-        System.out.println("Заказ " + order.getOrderId() + " взят в обработку");
-        return order;
+        return queue.poll();
     }
 
-    public synchronized void stopAcceptingOrders() {
-        acceptingOrders = false;
-        System.out.println("Прием новых заказов остановлен");
-        notifyAll();
+    /**
+     * Javadoc.
+     */
+    public synchronized List<Order> getUnfinishedOrders() {
+        return new LinkedList<>(queue);
     }
 }
