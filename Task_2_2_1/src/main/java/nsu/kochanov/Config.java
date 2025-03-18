@@ -13,6 +13,9 @@ public class Config {
     private int numBakers;
     private int numCouriers;
 
+    /**
+     * Javadoc.
+     */
     public static Config loadConfig(String fileName) {
         Gson gson = new Gson();
         ClassLoader classLoader = Config.class.getClassLoader();
@@ -24,14 +27,19 @@ public class Config {
             try (Reader reader = new InputStreamReader(inputStream)) {
                 return gson.fromJson(reader, Config.class);
             }
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
     // Геттеры для полей
-    public int getNumBakers() { return numBakers; }
-    public int getNumCouriers() { return numCouriers; }
+    public int getNumBakers() {
+        return numBakers;
+    }
+    public int getNumCouriers() {
+        return numCouriers;
+    }
 
 }

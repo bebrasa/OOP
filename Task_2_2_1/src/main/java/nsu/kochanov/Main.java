@@ -4,6 +4,9 @@ package nsu.kochanov;
  * Javadoc.
  */
 public class Main {
+    /**
+     * Javadoc.
+     */
     public static void main(String[] args) throws InterruptedException {
         Config config = Config.loadConfig("pizzeria_config.json");
         if (config == null) {
