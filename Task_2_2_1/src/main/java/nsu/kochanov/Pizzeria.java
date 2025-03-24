@@ -11,6 +11,7 @@ import java.util.List;
  */
 class Pizzeria {
     private final OrderQueue orderQueue;
+    private final Warehouse warehouse;
     private final List<Thread> bakers;
     private final List<Thread> couriers;
     private volatile boolean isOpen = true;
@@ -19,7 +20,7 @@ class Pizzeria {
 
     public Pizzeria(int bakersCount, int couriersCount) {
         orderQueue = new OrderQueue();
-        Warehouse warehouse = new Warehouse();
+        warehouse = new Warehouse();
         bakers = new LinkedList<>();
         couriers = new LinkedList<>();
 
@@ -52,15 +53,36 @@ class Pizzeria {
     /**
      * Javadoc.
      */
-    public void stop() {
+    public synchronized void stop() {
         isOpen = false;
         System.out.println("Закрытие пиццерии...");
 
-        // Прерываем работу потоков
-        bakers.forEach(Thread::interrupt);
-        couriers.forEach(Thread::interrupt);
+        orderQueue.stopAcceptingOrders();
+        warehouse.stopProcessing();
 
-        // Сохраняем незавершенные заказы
+        synchronized (orderQueue) {
+            orderQueue.notifyAll();
+        }
+        synchronized (warehouse) {
+            warehouse.notifyAll();
+        }
+
+        for (Thread baker : bakers) {
+            try {
+                baker.join();
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
+
+        for (Thread courier : couriers) {
+            try {
+                courier.join();
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
+
         saveUnfinishedOrders();
         System.out.println("Пиццерия закрыта.");
     }

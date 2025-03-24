@@ -20,8 +20,11 @@ class Baker implements Runnable {
     @Override
     public void run() {
         try {
-            while (!Thread.interrupted()) {
+            while (true) {
                 Order order = queue.takeOrder();
+                if (order == null) {
+                    break;
+                }
                 System.out.println("[" + order.getId() + "] Выпекает пекарь " + id);
                 Thread.sleep(2000);
                 warehouse.store(order);

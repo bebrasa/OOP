@@ -18,8 +18,11 @@ class Courier implements Runnable {
     @Override
     public void run() {
         try {
-            while (!Thread.interrupted()) {
+            while (true) {
                 Order order = warehouse.take();
+                if (order == null) {
+                    break;
+                }
                 System.out.println("[" + order.getId() + "] Доставляет курьер " + id);
                 Thread.sleep(3000);
                 System.out.println("[" + order.getId() + "] Доставлена");

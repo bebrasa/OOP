@@ -9,13 +9,17 @@ import java.util.Queue;
 class Warehouse {
     private final Queue<Order> storage = new LinkedList<>();
     private static final int CAPACITY = 5;
+    private volatile boolean processing = true;
 
     /**
      * Javadoc.
      */
     public synchronized void store(Order order) throws InterruptedException {
-        while (storage.size() >= CAPACITY) {
+        while (storage.size() >= CAPACITY && processing) {
             wait();
+        }
+        if (!processing) {
+            return;
         }
         storage.offer(order);
         notifyAll();
@@ -26,12 +30,23 @@ class Warehouse {
      * Javadoc.
      */
     public synchronized Order take() throws InterruptedException {
-        while (storage.isEmpty()) {
+        while (storage.isEmpty() && processing) {
             wait();
+        }
+        if (!processing) {
+            return null;
         }
         Order order = storage.poll();
         notifyAll();
         return order;
+    }
+
+    /**
+     * Javadoc.
+     */
+    public synchronized void stopProcessing() {
+        processing = false;
+        notifyAll();
     }
 
     /**

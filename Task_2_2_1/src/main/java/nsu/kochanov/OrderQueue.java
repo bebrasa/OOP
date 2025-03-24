@@ -29,10 +29,18 @@ class OrderQueue {
      * Javadoc.
      */
     public synchronized Order takeOrder() throws InterruptedException {
-        while (queue.isEmpty()) {
+        while (queue.isEmpty() && acceptingOrders) {
             wait();
         }
         return queue.poll();
+    }
+
+    /**
+     * Javadoc.
+     */
+    public synchronized void stopAcceptingOrders() {
+        acceptingOrders = false;
+        notifyAll();
     }
 
     /**
