@@ -11,9 +11,9 @@ import javafx.scene.layout.Pane;
 public class GameView {
     private static final int WIDTH = 800;
     private static final int HEIGHT = WIDTH;
-    private static final int SQUARE_SIZE = WIDTH / 20;
-    private final Canvas canvas = new Canvas(800, 800);
-    private final Pane root = new Pane(canvas);
+    private static final int SQUARE_SIZE = WIDTH / 20; //40 pixels
+    private final Canvas canvas = new Canvas(800, 800); //surface for drawing
+    private final Pane root = new Pane(canvas); //container for graphic elements javafx
     private final GraphicsContext gc = canvas.getGraphicsContext2D();
 
     public Pane getRoot() {
