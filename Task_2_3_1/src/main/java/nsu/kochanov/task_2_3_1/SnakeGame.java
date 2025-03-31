@@ -21,12 +21,13 @@ public class SnakeGame {
     private static final int DOWN = 3;
 
     private final List<Point> snakeBody = new ArrayList<>();
-    private Point snakeHead;
-    private Image foodImage;
-    private int foodX, foodY;
+    private final List<Point> foodPositions = new ArrayList<>();
+    private final List<Image> foodImages = new ArrayList<>();
     private boolean gameOver;
     private int currentDirection;
     private int score = 0;
+    private int level = 1;
+    private int speed = 150; // Начальная скорость (миллисекунды задержки)
 
     public SnakeGame() {
         resetGame();
@@ -34,14 +35,13 @@ public class SnakeGame {
 
     public void resetGame() {
         snakeBody.clear();
-        for (int i = 0; i < 3; i++) {
-            snakeBody.add(new Point(5, ROWS / 2));
-        }
-        snakeHead = snakeBody.get(0);
-        generateFood();
+        snakeBody.add(new Point(5, ROWS / 2));
         gameOver = false;
         currentDirection = RIGHT;
         score = 0;
+        level = 1;
+        speed = 150;
+        generateFood();
     }
 
     public void move() {
@@ -52,10 +52,10 @@ public class SnakeGame {
         }
 
         switch (currentDirection) {
-            case RIGHT -> snakeHead.x++;
-            case LEFT -> snakeHead.x--;
-            case UP -> snakeHead.y--;
-            case DOWN -> snakeHead.y++;
+            case RIGHT -> snakeBody.get(0).x++;
+            case LEFT -> snakeBody.get(0).x--;
+            case UP -> snakeBody.get(0).y--;
+            case DOWN -> snakeBody.get(0).y++;
         }
 
         checkCollision();
@@ -64,18 +64,28 @@ public class SnakeGame {
 
     private void generateFood() {
         Random random = new Random();
-        while (true) {
-            foodX = random.nextInt(ROWS);
-            foodY = random.nextInt(COLUMNS);
-            boolean foodOnSnake = snakeBody.stream().anyMatch(p -> p.x == foodX && p.y == foodY);
-            if (!foodOnSnake) {
-                foodImage = FOODS_IMAGE[random.nextInt(FOODS_IMAGE.length)];
-                break;
+        foodPositions.clear();
+        foodImages.clear();
+
+        int foodCount = random.nextInt(1, 4); // от 1 до 3 элементов еды
+        for (int i = 0; i < foodCount; i++) {
+            while (true) {
+                int foodX = random.nextInt(ROWS);
+                int foodY = random.nextInt(COLUMNS);
+                boolean foodOnSnake = snakeBody.stream().anyMatch(p -> p.x == foodX && p.y == foodY);
+                boolean foodExists = foodPositions.stream().anyMatch(p -> p.x == foodX && p.y == foodY);
+
+                if (!foodOnSnake && !foodExists) {
+                    foodPositions.add(new Point(foodX, foodY));
+                    foodImages.add(FOODS_IMAGE[random.nextInt(FOODS_IMAGE.length)]);
+                    break;
+                }
             }
         }
     }
 
     private void checkCollision() {
+        Point snakeHead = snakeBody.get(0);
         if (snakeHead.x < 0 || snakeHead.y < 0 || snakeHead.x >= ROWS || snakeHead.y >= COLUMNS) {
             gameOver = true;
         }
@@ -88,10 +98,43 @@ public class SnakeGame {
     }
 
     private void checkFood() {
-        if (snakeHead.x == foodX && snakeHead.y == foodY) {
-            snakeBody.add(new Point(-1, -1));
-            generateFood();
-            score += 5;
+        Point snakeHead = snakeBody.get(0);
+        for (int i = 0; i < foodPositions.size(); i++) {
+            if (snakeHead.equals(foodPositions.get(i))) {
+                snakeBody.add(new Point(-1, -1)); // Увеличиваем змею
+                foodPositions.remove(i);
+                foodImages.remove(i);
+                score += 5;
+
+                // Добавляем новую еду вместо съеденной
+                generateSingleFood();
+
+                if (score % 20 == 0) { // Каждые 20 очков - новый уровень
+                    level++;
+                    speed = Math.max(50, speed - 20); // Уменьшаем задержку, но не меньше 50 мс
+                    updateGameSpeed(); // Применяем новую скорость
+                }
+                break;
+            }
+        }
+    }
+    private void updateGameSpeed() {
+        // Здесь должен быть код, который перезапускает таймер с новой скоростью
+        System.out.println("Новый уровень: " + level + ", скорость: " + speed + " мс");
+    }
+
+    private void generateSingleFood() {
+        Random random = new Random();
+        while (foodPositions.size() < 3) { // Количество еды остается прежним (можно поменять на больше)
+            int foodX = random.nextInt(ROWS);
+            int foodY = random.nextInt(COLUMNS);
+            boolean foodOnSnake = snakeBody.stream().anyMatch(p -> p.x == foodX && p.y == foodY);
+            boolean foodExists = foodPositions.stream().anyMatch(p -> p.x == foodX && p.y == foodY);
+
+            if (!foodOnSnake && !foodExists) {
+                foodPositions.add(new Point(foodX, foodY));
+                foodImages.add(FOODS_IMAGE[random.nextInt(FOODS_IMAGE.length)]);
+            }
         }
     }
 
@@ -106,10 +149,10 @@ public class SnakeGame {
     }
 
     public List<Point> getSnakeBody() { return snakeBody; }
-    public Point getSnakeHead() { return snakeHead; }
-    public int getFoodX() { return foodX; }
-    public int getFoodY() { return foodY; }
-    public Image getFoodImage() { return foodImage; }
+    public List<Point> getFoodPositions() { return foodPositions; }
+    public List<Image> getFoodImages() { return foodImages; }
     public boolean isGameOver() { return gameOver; }
     public int getScore() { return score; }
+    public int getLevel() { return level; }
+    public int getSpeed() { return speed; }
 }

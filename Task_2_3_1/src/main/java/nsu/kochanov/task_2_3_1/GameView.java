@@ -2,32 +2,29 @@ package nsu.kochanov.task_2_3_1;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import java.awt.Point;
 import java.util.List;
-import javafx.scene.layout.Pane;
 
 public class GameView {
     private static final int WIDTH = 800;
     private static final int HEIGHT = WIDTH;
-    private static final int SQUARE_SIZE = WIDTH / 20; //40 pixels
-    private final Canvas canvas = new Canvas(800, 800); //surface for drawing
-    private final Pane root = new Pane(canvas); //container for graphic elements javafx
-    private final GraphicsContext gc = canvas.getGraphicsContext2D();
+    private static final int SQUARE_SIZE = WIDTH / 20;
 
-    public Pane getRoot() {
-        return root;
-    }
+    private final Canvas canvas;
+    private final GraphicsContext gc;
 
-    public Canvas getCanvas() {
-        return canvas;
+    public GameView(Canvas canvas) {
+        this.canvas = canvas;
+        this.gc = canvas.getGraphicsContext2D();
     }
 
     public void render(SnakeGame game) {
         gc.clearRect(0, 0, WIDTH, HEIGHT);
         drawBackground();
-        drawFood(game.getFoodX(), game.getFoodY(), game.getFoodImage());
+        drawFood(game.getFoodPositions(), game.getFoodImages());
         drawSnake(game.getSnakeBody());
         drawScore(game.getScore());
 
@@ -47,8 +44,12 @@ public class GameView {
         }
     }
 
-    private void drawFood(int x, int y, javafx.scene.image.Image image) {
-        gc.drawImage(image, x * SQUARE_SIZE, y * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
+    private void drawFood(List<Point> foodPositions, List<Image> foodImages) {
+        for (int i = 0; i < foodPositions.size(); i++) {
+            Point foodPos = foodPositions.get(i);
+            Image foodImage = foodImages.get(i);
+            gc.drawImage(foodImage, foodPos.x * SQUARE_SIZE, foodPos.y * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
+        }
     }
 
     private void drawSnake(List<Point> snake) {
