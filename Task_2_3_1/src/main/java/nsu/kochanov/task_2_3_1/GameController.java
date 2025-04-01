@@ -52,7 +52,7 @@ public class GameController {
         view = new GameView(gameCanvas);
         setupMusic();
         setupGameLoop();
-        updateUI();
+        updateUi();
     }
 
     /**
@@ -96,7 +96,8 @@ public class GameController {
                 mediaPlayer.play();
             }
         }
-        catch (Exception e) {
+        catch (Exception e)
+        {
             System.err.println("Error loading music: " + e.getMessage());
         }
     }
@@ -110,7 +111,7 @@ public class GameController {
                 e -> {
                     game.move();
                     view.render(game);
-                    updateUI();
+                    updateUi();
                     updateSpeed();
                 }
         ));
@@ -146,7 +147,7 @@ public class GameController {
     private void handleRestart() {
         game.resetGame();
         view.render(game);
-        updateUI();
+        updateUi();
         updateSpeed();
 
         if (mediaPlayer != null) {
@@ -166,7 +167,7 @@ public class GameController {
                 e -> {
                     game.move();
                     view.render(game);
-                    updateUI();
+                    updateUi();
                 }
         ));
         timeline.play();
@@ -216,7 +217,7 @@ public class GameController {
     /**
      * Updates the game UI with current level and score.
      */
-    private void updateUI() {
+    private void updateUi() {
         levelLabel.setText(String.format("Level: %d", game.getLevel()));
         scoreLabel.setText(String.format("Score: %d", game.getScore()));
     }
