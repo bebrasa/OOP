@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"m":"nsu.kochanov.task_2_3_1","l":"nsu.kochanov.task_2_3_1"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"m":"nsu.kochanov.task231","l":"nsu.kochanov.task231"}];updateSearchResults();

@@ -1,1 +1,1 @@
-moduleSearchIndex = [{"l":"nsu.kochanov.task_2_3_1"}];updateSearchResults();
+moduleSearchIndex = [{"l":"nsu.kochanov.task231"}];updateSearchResults();
