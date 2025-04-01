@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"nsu.kochanov.task_2_3_1","l":"Bot"},{"p":"nsu.kochanov.task_2_3_1","l":"GameController"},{"p":"nsu.kochanov.task_2_3_1","l":"GameView"},{"p":"nsu.kochanov.task_2_3_1","l":"Main"},{"p":"nsu.kochanov.task_2_3_1","l":"SnakeGame"}];updateSearchResults();
