@@ -44,7 +44,7 @@ public class Bot {
             return;
         }
 
-        Point head = body.getFirst();
+        Point head = body.get(0);
         updateTargetFood(head);
 
         if (targetFood != null) {
@@ -72,7 +72,7 @@ public class Bot {
      * Checks if bot has reached food and handles food consumption.
      */
     private void checkFood() {
-        Point head = body.getFirst();
+        Point head = body.get(0);
         List<Point> foodPositions = game.getFoodPositions();
         List<Point> foodsToRemove = new ArrayList<>();
 
@@ -86,7 +86,7 @@ public class Bot {
 
         game.getFoodPositions().removeAll(foodsToRemove);
         if (!foodsToRemove.isEmpty()) {
-            game.getFoodImages().removeFirst();
+            game.getFoodImages().remove(0);
         }
     }
 
@@ -217,7 +217,7 @@ public class Bot {
             body.get(i).setLocation(body.get(i - 1));
         }
 
-        Point head = body.getFirst();
+        Point head = body.get(0);
         switch (direction) {
             case SnakeGame.RIGHT:
                 head.x++;

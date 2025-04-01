@@ -34,9 +34,6 @@ public class GameView {
      * - Food items
      * - Player snake and bots
      * - Score display
-     * - Game over screen when needed
-     *
-     * @param game Current game state to render
      */
     public void render(SnakeGame game) {
         clearCanvas();

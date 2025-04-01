@@ -58,7 +58,8 @@ public class GameController {
     /**
      * Configures the music tracks and combo box selection.
      */
-    private void setupMusic() {
+    private void setupMusic()
+    {
         musicTracks.put("Classic", "/nsu/kochanov/task_2_3_1/buSHIDO.mp3");
         musicTracks.put("Retro", "/nsu/kochanov/task_2_3_1/music.mp3");
 
@@ -72,7 +73,8 @@ public class GameController {
     /**
      * Changes the currently playing music track.
      */
-    private void changeMusic() {
+    private void changeMusic()
+    {
         String selected = musicComboBox.getSelectionModel().getSelectedItem();
         String musicPath = musicTracks.get(selected);
 
@@ -96,8 +98,7 @@ public class GameController {
                 mediaPlayer.play();
             }
         }
-        catch (Exception e)
-        {
+        catch (Exception e) {
             System.err.println("Error loading music: " + e.getMessage());
         }
     }

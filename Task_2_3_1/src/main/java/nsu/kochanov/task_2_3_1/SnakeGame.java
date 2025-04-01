@@ -21,7 +21,7 @@ public class SnakeGame {
     public static final int DOWN = 3;
 
     private static final Image[] FOODS_IMAGE = new Image[] {
-            new Image(Objects.requireNonNull(
+            new Image(Objects.requireNonNull(  // <-- Now indented 8 spaces
                     SnakeGame.class.getResource(
                             "/nsu/kochanov/task_2_3_1/img/ic_orange.png"
                     )
@@ -106,7 +106,7 @@ public class SnakeGame {
             snakeBody.get(i).setLocation(snakeBody.get(i - 1));
         }
 
-        Point head = snakeBody.getFirst();
+        Point head = snakeBody.get(0);
         switch (currentDirection) {
             case RIGHT:
                 head.x++;
@@ -165,7 +165,7 @@ public class SnakeGame {
      * Checks for collisions with walls, self and bots.
      */
     private void checkCollision() {
-        Point head = snakeBody.getFirst();
+        Point head = snakeBody.get(0);
 
         if (head.x < 0
                 || head.y < 0
@@ -193,8 +193,8 @@ public class SnakeGame {
      * Checks and resolves collisions between bots.
      */
     private void checkBotCollisions() {
-        Point bot1Head = bot1.getBody().getFirst();
-        Point bot2Head = bot2.getBody().getFirst();
+        Point bot1Head = bot1.getBody().get(0);
+        Point bot2Head = bot2.getBody().get(0);
 
         if (bot1Head.equals(bot2Head)) {
             bot1.changeDirection((bot1.getDirection() + 1) % 4);
@@ -209,8 +209,8 @@ public class SnakeGame {
      * Checks and resolves side-by-side bot collisions.
      */
     private void checkBotSideCollision() {
-        Point bot1Head = bot1.getBody().getFirst();
-        Point bot2Head = bot2.getBody().getFirst();
+        Point bot1Head = bot1.getBody().get(0);
+        Point bot2Head = bot2.getBody().get(0);
 
         if (Math.abs(bot1Head.x - bot2Head.x)
                 + Math.abs(bot1Head.y - bot2Head.y) == 1) {
@@ -237,9 +237,9 @@ public class SnakeGame {
      * Checks if any entity ate food and handles consequences.
      */
     private void checkFood() {
-        Point playerHead = snakeBody.getFirst();
-        Point bot1Head = bot1.getBody().getFirst();
-        Point bot2Head = bot2.getBody().getFirst();
+        Point playerHead = snakeBody.get(0);
+        Point bot1Head = bot1.getBody().get(0);
+        Point bot2Head = bot2.getBody().get(0);
         List<Integer> foodToRemove = new ArrayList<>();
 
         for (int i = 0; i < foodPositions.size(); i++) {
