@@ -1,4 +1,4 @@
-package nsu.kochanov.task_2_3_1;
+package nsu.kochanov.task231;
 
 import java.awt.Point;
 import java.util.ArrayList;

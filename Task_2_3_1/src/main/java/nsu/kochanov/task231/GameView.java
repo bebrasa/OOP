@@ -1,4 +1,4 @@
-package nsu.kochanov.task_2_3_1;
+package nsu.kochanov.task231;
 
 import java.awt.Point;
 import java.util.List;
@@ -29,11 +29,7 @@ public class GameView {
     }
 
     /**
-     * Renders complete game state including:
-     * - Background grid
-     * - Food items
-     * - Player snake and bots
-     * - Score display
+     * javadoc.
      */
     public void render(SnakeGame game) {
         clearCanvas();

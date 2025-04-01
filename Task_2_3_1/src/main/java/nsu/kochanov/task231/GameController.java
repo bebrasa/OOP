@@ -1,4 +1,4 @@
-package nsu.kochanov.task_2_3_1;
+package nsu.kochanov.task231;
 
 import java.net.URL;
 import java.util.HashMap;
@@ -60,8 +60,8 @@ public class GameController {
      */
     private void setupMusic()
     {
-        musicTracks.put("Classic", "/nsu/kochanov/task_2_3_1/buSHIDO.mp3");
-        musicTracks.put("Retro", "/nsu/kochanov/task_2_3_1/music.mp3");
+        musicTracks.put("Classic", "/nsu/kochanov/task231/buSHIDO.mp3");
+        musicTracks.put("Retro", "/nsu/kochanov/task231/music.mp3");
 
         musicComboBox.getItems().addAll(musicTracks.keySet());
         musicComboBox.getSelectionModel().selectFirst();

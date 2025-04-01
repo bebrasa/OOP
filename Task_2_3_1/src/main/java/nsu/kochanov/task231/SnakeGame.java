@@ -1,4 +1,4 @@
-package nsu.kochanov.task_2_3_1;
+package nsu.kochanov.task231;
 
 import java.awt.Point;
 import java.util.ArrayList;
@@ -21,14 +21,14 @@ public class SnakeGame {
     public static final int DOWN = 3;
 
     private static final Image[] FOODS_IMAGE = new Image[] {
-            new Image(Objects.requireNonNull(  // <-- Now indented 8 spaces
+            new Image(Objects.requireNonNull(
                     SnakeGame.class.getResource(
-                            "/nsu/kochanov/task_2_3_1/img/ic_orange.png"
+                            "/nsu/kochanov/task231/img/ic_orange.png"
                     )
             ).toExternalForm()),
             new Image(Objects.requireNonNull(
                     SnakeGame.class.getResource(
-                            "/nsu/kochanov/task_2_3_1/img/ic_apple.png"
+                            "/nsu/kochanov/task231/img/ic_apple.png"
                     )
             ).toExternalForm())
     };

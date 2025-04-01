@@ -26,8 +26,8 @@ tasks.withType(JavaCompile) {
 }
 
 application {
-  mainModule = 'nsu.kochanov.task_2_3_1'
-  mainClass = 'nsu.kochanov.task_2_3_1.Main'
+  mainModule = 'nsu.kochanov.task231'
+  mainClass = 'nsu.kochanov.task231.Main'
 }
 
 javafx {

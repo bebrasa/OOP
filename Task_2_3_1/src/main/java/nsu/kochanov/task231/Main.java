@@ -1,4 +1,4 @@
-package nsu.kochanov.task_2_3_1;
+package nsu.kochanov.task231;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +16,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass()
-                .getResource("/nsu/kochanov/task_2_3_1/sample.fxml"));
+                .getResource("/nsu/kochanov/task231/sample.fxml"));
         Parent root = loader.load();
 
         GameController controller = loader.getController();

@@ -10,7 +10,7 @@
 
 <VBox alignment="CENTER" xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="nsu.kochanov.task_2_3_1.GameController"
+      fx:controller="nsu.kochanov.task231.GameController"
       stylesheets="@styles.css">
 
     <!-- Верхняя панель с кнопками -->
