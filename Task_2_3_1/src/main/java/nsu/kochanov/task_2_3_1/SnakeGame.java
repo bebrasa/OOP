@@ -106,10 +106,20 @@ public class SnakeGame {
 
         Point head = snakeBody.getFirst();
         switch (currentDirection) {
-            case RIGHT -> head.x++;
-            case LEFT -> head.x--;
-            case UP -> head.y--;
-            case DOWN -> head.y++;
+            case RIGHT:
+                head.x++;
+                break;
+            case LEFT:
+                head.x--;
+                break;
+            case UP:
+                head.y--;
+                break;
+            case DOWN:
+                head.y++;
+                break;
+            default:
+                break;
         }
     }
 
@@ -138,14 +148,15 @@ public class SnakeGame {
 
     /**
      * Checks if position is occupied by any game entity.
+     *
      * @param point Position to check
      * @return True if position is occupied
      */
     private boolean isPositionOccupied(Point point) {
-        return snakeBody.contains(point) ||
-                bot1.getBody().contains(point) ||
-                bot2.getBody().contains(point) ||
-                foodPositions.contains(point);
+        return snakeBody.contains(point)
+                || bot1.getBody().contains(point)
+                || bot2.getBody().contains(point)
+                || foodPositions.contains(point);
     }
 
     /**
@@ -154,8 +165,10 @@ public class SnakeGame {
     private void checkCollision() {
         Point head = snakeBody.getFirst();
 
-        if (head.x < 0 || head.y < 0 ||
-                head.x >= ROWS || head.y >= COLUMNS) {
+        if (head.x < 0
+                || head.y < 0
+                || head.x >= ROWS
+                || head.y >= COLUMNS) {
             gameOver = true;
             return;
         }
@@ -167,8 +180,8 @@ public class SnakeGame {
             }
         }
 
-        if (isPointInBotBody(head, bot1) ||
-                isPointInBotBody(head, bot2)) {
+        if (isPointInBotBody(head, bot1)
+                || isPointInBotBody(head, bot2)) {
             gameOver = true;
         }
         checkBotCollisions();
@@ -197,8 +210,8 @@ public class SnakeGame {
         Point bot1Head = bot1.getBody().getFirst();
         Point bot2Head = bot2.getBody().getFirst();
 
-        if (Math.abs(bot1Head.x - bot2Head.x) +
-                Math.abs(bot1Head.y - bot2Head.y) == 1) {
+        if (Math.abs(bot1Head.x - bot2Head.x)
+                + Math.abs(bot1Head.y - bot2Head.y) == 1) {
             if (random.nextBoolean()) {
                 bot1.changeDirection((bot1.getDirection() + 1) % 4);
             } else {
@@ -209,6 +222,7 @@ public class SnakeGame {
 
     /**
      * Checks if point is part of bot's body.
+     *
      * @param point Point to check
      * @param bot Bot to check against
      * @return True if point is in bot's body
@@ -238,10 +252,12 @@ public class SnakeGame {
                     level++;
                     speed = Math.max(50, speed - 20);
                 }
-            } else if (bot1Head.equals(food)) {
+            }
+            else if (bot1Head.equals(food)) {
                 bot1.getBody().add(new Point(-1, -1));
                 eaten = true;
-            } else if (bot2Head.equals(food)) {
+            }
+            else if (bot2Head.equals(food)) {
                 bot2.getBody().add(new Point(-1, -1));
                 eaten = true;
             }
@@ -264,51 +280,106 @@ public class SnakeGame {
 
     /**
      * Changes player snake direction if valid.
+     *
      * @param direction New direction (RIGHT, LEFT, UP, DOWN)
      */
     public void setDirection(int direction) {
-        if ((currentDirection == LEFT && direction == RIGHT) ||
-                (currentDirection == RIGHT && direction == LEFT) ||
-                (currentDirection == UP && direction == DOWN) ||
-                (currentDirection == DOWN && direction == UP)) {
+        if ((currentDirection == LEFT && direction == RIGHT)
+                || (currentDirection == RIGHT && direction == LEFT)
+                || (currentDirection == UP && direction == DOWN)
+                || (currentDirection == DOWN && direction == UP)) {
             return;
         }
         currentDirection = direction;
     }
 
-    // Getters below
-
     /**
-     * @return List of all bodies (player and bots)
+     * Gets all bodies in the game.
+     *
+     * @return List containing all snake bodies
      */
     public List<List<Point>> getAllBodies() {
         return List.of(snakeBody, bot1.getBody(), bot2.getBody());
     }
 
-    /** @return Player snake body */
-    public List<Point> getSnakeBody() { return snakeBody; }
+    /**
+     * Gets player snake body.
+     *
+     * @return List of points representing snake body
+     */
+    public List<Point> getSnakeBody() {
+        return snakeBody;
+    }
 
-    /** @return Current food positions */
-    public List<Point> getFoodPositions() { return foodPositions; }
+    /**
+     * Gets current food positions.
+     *
+     * @return List of food positions
+     */
+    public List<Point> getFoodPositions() {
+        return foodPositions;
+    }
 
-    /** @return Food images */
-    public List<Image> getFoodImages() { return foodImages; }
+    /**
+     * Gets food images.
+     *
+     * @return List of food images
+     */
+    public List<Image> getFoodImages() {
+        return foodImages;
+    }
 
-    /** @return Game over status */
-    public boolean isGameOver() { return gameOver; }
+    /**
+     * Checks if game is over.
+     *
+     * @return True if game is over
+     */
+    public boolean isGameOver() {
+        return gameOver;
+    }
 
-    /** @return Current score */
-    public int getScore() { return score; }
+    /**
+     * Gets current score.
+     *
+     * @return Current game score
+     */
+    public int getScore() {
+        return score;
+    }
 
-    /** @return Current level */
-    public int getLevel() { return level; }
+    /**
+     * Gets current level.
+     *
+     * @return Current game level
+     */
+    public int getLevel() {
+        return level;
+    }
 
-    /** @return Current game speed */
-    public int getSpeed() { return speed; }
+    /**
+     * Gets current game speed.
+     *
+     * @return Current game speed in milliseconds
+     */
+    public int getSpeed() {
+        return speed;
+    }
 
-    /** @return First bot instance */
-    public Bot getBot1() { return bot1; }
+    /**
+     * Gets first bot instance.
+     *
+     * @return First bot
+     */
+    public Bot getBot1() {
+        return bot1;
+    }
 
-    /** @return Second bot instance */
-    public Bot getBot2() { return bot2; }
+    /**
+     * Gets second bot instance.
+     *
+     * @return Second bot
+     */
+    public Bot getBot2() {
+        return bot2;
+    }
 }

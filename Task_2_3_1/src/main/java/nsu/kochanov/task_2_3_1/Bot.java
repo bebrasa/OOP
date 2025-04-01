@@ -22,6 +22,7 @@ public class Bot {
 
     /**
      * Creates a new bot instance.
+     *
      * @param game Reference to the main game instance
      * @param startX Initial x-coordinate
      * @param startY Initial y-coordinate
@@ -51,13 +52,15 @@ public class Bot {
             if (newDirection != -1) {
                 direction = newDirection;
                 stuckCounter = 0;
-            } else {
+            }
+            else {
                 stuckCounter++;
                 if (stuckCounter > 5) {
                     direction = findRandomSafeDirection(head);
                 }
             }
-        } else {
+        }
+        else {
             direction = findRandomSafeDirection(head);
         }
 
@@ -66,38 +69,46 @@ public class Bot {
     }
 
     /**
-     * Checks if bot has reached food.
+     * Checks if bot has reached food and handles food consumption.
      */
     private void checkFood() {
         Point head = body.getFirst();
         List<Point> foodPositions = game.getFoodPositions();
-
-        // Создаем копию списка для безопасного удаления
         List<Point> foodsToRemove = new ArrayList<>();
 
         for (Point food : foodPositions) {
             if (head.equals(food)) {
                 body.add(new Point(-1, -1));
                 foodsToRemove.add(food);
-                break; // Бот может съесть только одну еду за ход
+                break;
             }
         }
 
-        // Удаляем съеденную еду через основной игровой объект
         game.getFoodPositions().removeAll(foodsToRemove);
         if (!foodsToRemove.isEmpty()) {
-            game.getFoodImages().removeFirst(); // Удаляем соответствующее изображение
+            game.getFoodImages().removeFirst();
         }
     }
 
-    // Остальные методы остаются без изменений...
+    /**
+     * Updates the target food for the bot.
+     *
+     * @param head Current head position of the bot
+     */
     private void updateTargetFood(Point head) {
         targetFood = findNearestFood(head);
-        if (targetFood != null && !game.getFoodPositions().contains(targetFood)) {
+        if (targetFood != null
+                && !game.getFoodPositions().contains(targetFood)) {
             targetFood = findNearestFood(head);
         }
     }
 
+    /**
+     * Finds the nearest food to the bot's head position.
+     *
+     * @param head Current head position
+     * @return Nearest food point or null if no food available
+     */
     private Point findNearestFood(Point head) {
         return game.getFoodPositions().stream()
                 .min(Comparator.comparingInt(food ->
@@ -105,6 +116,13 @@ public class Bot {
                 .orElse(null);
     }
 
+    /**
+     * Calculates the best direction to reach target food.
+     *
+     * @param head Current head position
+     * @param target Target food position
+     * @return Best direction or -1 if no safe path available
+     */
     private int calculateBestDirection(Point head, Point target) {
         List<Integer> possibleDirections = new ArrayList<>();
         int dx = target.x - head.x;
@@ -128,26 +146,57 @@ public class Bot {
                 : possibleDirections.get(random.nextInt(possibleDirections.size()));
     }
 
+    /**
+     * Checks if movement in specified direction is safe.
+     *
+     * @param direction Direction to check
+     * @param head Current head position
+     * @return true if direction is safe, false otherwise
+     */
     private boolean isDirectionSafe(int direction, Point head) {
         Point next = new Point(head);
         switch (direction) {
-            case SnakeGame.RIGHT -> next.x++;
-            case SnakeGame.LEFT -> next.x--;
-            case SnakeGame.UP -> next.y--;
-            case SnakeGame.DOWN -> next.y++;
+            case SnakeGame.RIGHT:
+                next.x++;
+                break;
+            case SnakeGame.LEFT:
+                next.x--;
+                break;
+            case SnakeGame.UP:
+                next.y--;
+                break;
+            case SnakeGame.DOWN:
+                next.y++;
+                break;
+            default:
+                break;
         }
         return isPositionSafe(next);
     }
 
+    /**
+     * Checks if position is safe to move to.
+     *
+     * @param point Position to check
+     * @return true if position is safe, false otherwise
+     */
     private boolean isPositionSafe(Point point) {
-        if (point.x < 0 || point.y < 0 ||
-                point.x >= SnakeGame.ROWS || point.y >= SnakeGame.COLUMNS) {
+        if (point.x < 0
+                || point.y < 0
+                || point.x >= SnakeGame.ROWS
+                || point.y >= SnakeGame.COLUMNS) {
             return false;
         }
         return game.getAllBodies().stream()
                 .noneMatch(body -> body.stream().anyMatch(p -> p.equals(point)));
     }
 
+    /**
+     * Finds a random safe direction when bot is stuck.
+     *
+     * @param head Current head position
+     * @return Safe direction or current direction if none found
+     */
     private int findRandomSafeDirection(Point head) {
         List<Integer> safeDirections = new ArrayList<>();
         for (int dir = 0; dir < 4; dir++) {
@@ -160,6 +209,9 @@ public class Bot {
                 : safeDirections.get(random.nextInt(safeDirections.size()));
     }
 
+    /**
+     * Moves the bot in current direction.
+     */
     protected void moveInDirection() {
         for (int i = body.size() - 1; i >= 1; i--) {
             body.get(i).setLocation(body.get(i - 1));
@@ -167,27 +219,57 @@ public class Bot {
 
         Point head = body.getFirst();
         switch (direction) {
-            case SnakeGame.RIGHT -> head.x++;
-            case SnakeGame.LEFT -> head.x--;
-            case SnakeGame.UP -> head.y--;
-            case SnakeGame.DOWN -> head.y++;
+            case SnakeGame.RIGHT:
+                head.x++;
+                break;
+            case SnakeGame.LEFT:
+                head.x--;
+                break;
+            case SnakeGame.UP:
+                head.y--;
+                break;
+            case SnakeGame.DOWN:
+                head.y++;
+                break;
+            default:
+                break;
         }
     }
 
+    /**
+     * Changes bot's movement direction.
+     *
+     * @param newDirection New direction to set
+     */
     public void changeDirection(int newDirection) {
         if (newDirection >= 0 && newDirection <= 3) {
             this.direction = newDirection;
         }
     }
 
+    /**
+     * Gets current direction.
+     *
+     * @return current direction
+     */
     public int getDirection() {
         return direction;
     }
 
+    /**
+     * Gets bot's body points.
+     *
+     * @return list of body points
+     */
     public List<Point> getBody() {
         return body;
     }
 
+    /**
+     * Gets bot's color.
+     *
+     * @return bot color
+     */
     public Color getColor() {
         return color;
     }

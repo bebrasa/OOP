@@ -23,6 +23,7 @@ public class GameView {
 
     /**
      * Creates new GameView with specified canvas.
+     *
      * @param canvas Canvas to draw game elements on
      */
     public GameView(Canvas canvas) {
@@ -36,6 +37,7 @@ public class GameView {
      * - Player snake and bots
      * - Score display
      * - Game over screen when needed
+     *
      * @param game Current game state to render
      */
     public void render(SnakeGame game) {
@@ -73,13 +75,15 @@ public class GameView {
                         i * SQUARE_SIZE,
                         j * SQUARE_SIZE,
                         SQUARE_SIZE,
-                        SQUARE_SIZE);
+                        SQUARE_SIZE
+                );
             }
         }
     }
 
     /**
      * Draws all food items on the canvas.
+     *
      * @param foodPositions List of food positions
      * @param foodImages List of food images corresponding to positions
      */
@@ -92,12 +96,14 @@ public class GameView {
                     foodPos.x * SQUARE_SIZE,
                     foodPos.y * SQUARE_SIZE,
                     SQUARE_SIZE,
-                    SQUARE_SIZE);
+                    SQUARE_SIZE
+            );
         }
     }
 
     /**
      * Draws a snake (player or bot) with specified color.
+     *
      * @param snake List of points representing snake body
      * @param color Color to draw the snake
      */
@@ -110,12 +116,14 @@ public class GameView {
                     SQUARE_SIZE - 1,
                     SQUARE_SIZE - 1,
                     20,
-                    20);
+                    20
+            );
         }
     }
 
     /**
      * Draws current score in top-left corner.
+     *
      * @param score Current game score
      */
     private void drawScore(int score) {

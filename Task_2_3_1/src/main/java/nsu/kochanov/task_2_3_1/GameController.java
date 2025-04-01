@@ -16,20 +16,37 @@ import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+/**
+ * Controller class for the Snake game application.
+ * Manages game logic, user input, and media playback.
+ */
 public class GameController {
     private SnakeGame game;
     private GameView view;
     private Timeline timeline;
     private MediaPlayer mediaPlayer;
 
-    @FXML private VBox root;
-    @FXML private Canvas gameCanvas;
-    @FXML private Label levelLabel;
-    @FXML private Label scoreLabel;
-    @FXML private ComboBox<String> musicComboBox;
+    @FXML
+    private VBox root;
+
+    @FXML
+    private Canvas gameCanvas;
+
+    @FXML
+    private Label levelLabel;
+
+    @FXML
+    private Label scoreLabel;
+
+    @FXML
+    private ComboBox<String> musicComboBox;
 
     private final Map<String, String> musicTracks = new HashMap<>();
 
+    /**
+     * Initializes the game controller.
+     * Sets up game components, music selection, and game loop.
+     */
     public void initialize() {
         game = new SnakeGame();
         view = new GameView(gameCanvas);
@@ -38,8 +55,10 @@ public class GameController {
         updateUI();
     }
 
+    /**
+     * Configures the music tracks and combo box selection.
+     */
     private void setupMusic() {
-        // Загрузка музыки из ресурсов (не из файловой системы!)
         musicTracks.put("Classic", "/nsu/kochanov/task_2_3_1/buSHIDO.mp3");
         musicTracks.put("Retro", "/nsu/kochanov/task_2_3_1/music.mp3");
 
@@ -47,16 +66,17 @@ public class GameController {
         musicComboBox.getSelectionModel().selectFirst();
         musicComboBox.setOnAction(event -> changeMusic());
 
-        // Инициализация первой музыки
         changeMusic();
     }
 
+    /**
+     * Changes the currently playing music track.
+     */
     private void changeMusic() {
         String selected = musicComboBox.getSelectionModel().getSelectedItem();
         String musicPath = musicTracks.get(selected);
 
         try {
-            // Правильный способ загрузки из ресурсов
             URL resourceUrl = getClass().getResource(musicPath);
             if (resourceUrl == null) {
                 System.err.println("Music file not found: " + musicPath);
@@ -71,15 +91,19 @@ public class GameController {
             mediaPlayer = new MediaPlayer(media);
             mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 
-            // Автовоспроизведение если игра активна
-            if (timeline != null && timeline.getStatus() == Timeline.Status.RUNNING) {
+            if (timeline != null
+                    && timeline.getStatus() == Timeline.Status.RUNNING) {
                 mediaPlayer.play();
             }
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             System.err.println("Error loading music: " + e.getMessage());
         }
     }
 
+    /**
+     * Sets up the main game loop timeline.
+     */
     private void setupGameLoop() {
         timeline = new Timeline(new KeyFrame(
                 Duration.millis(game.getSpeed()),
@@ -93,6 +117,9 @@ public class GameController {
         timeline.setCycleCount(Timeline.INDEFINITE);
     }
 
+    /**
+     * Handles the game start action.
+     */
     @FXML
     private void handleStart() {
         timeline.play();
@@ -101,6 +128,9 @@ public class GameController {
         }
     }
 
+    /**
+     * Handles the game stop action.
+     */
     @FXML
     private void handleStop() {
         timeline.stop();
@@ -109,6 +139,9 @@ public class GameController {
         }
     }
 
+    /**
+     * Handles the game restart action.
+     */
     @FXML
     private void handleRestart() {
         game.resetGame();
@@ -123,7 +156,9 @@ public class GameController {
         timeline.play();
     }
 
-    // Остальные методы без изменений...
+    /**
+     * Updates the game speed based on current level.
+     */
     private void updateSpeed() {
         timeline.stop();
         timeline.getKeyFrames().setAll(new KeyFrame(
@@ -137,6 +172,11 @@ public class GameController {
         timeline.play();
     }
 
+    /**
+     * Sets up the game scene and key listeners.
+     *
+     * @param stage The primary stage for the game
+     */
     public void setScene(Stage stage) {
         stage.setTitle("Snake Game");
         stage.getScene().setOnKeyPressed(
@@ -144,18 +184,38 @@ public class GameController {
         );
     }
 
+    /**
+     * Handles keyboard input for controlling the snake.
+     *
+     * @param code The key code of the pressed key
+     */
     private void handleInput(KeyCode code) {
-        if (code == KeyCode.RIGHT || code == KeyCode.D) {
-            game.setDirection(SnakeGame.RIGHT);
-        } else if (code == KeyCode.LEFT || code == KeyCode.A) {
-            game.setDirection(SnakeGame.LEFT);
-        } else if (code == KeyCode.UP || code == KeyCode.W) {
-            game.setDirection(SnakeGame.UP);
-        } else if (code == KeyCode.DOWN || code == KeyCode.S) {
-            game.setDirection(SnakeGame.DOWN);
+        switch (code) {
+            case RIGHT:
+            case D:
+                game.setDirection(SnakeGame.RIGHT);
+                break;
+            case LEFT:
+            case A:
+                game.setDirection(SnakeGame.LEFT);
+                break;
+            case UP:
+            case W:
+                game.setDirection(SnakeGame.UP);
+                break;
+            case DOWN:
+            case S:
+                game.setDirection(SnakeGame.DOWN);
+                break;
+            default:
+                // Ignore other keys
+                break;
         }
     }
 
+    /**
+     * Updates the game UI with current level and score.
+     */
     private void updateUI() {
         levelLabel.setText(String.format("Level: %d", game.getLevel()));
         scoreLabel.setText(String.format("Score: %d", game.getScore()));
