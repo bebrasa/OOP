@@ -40,3 +40,21 @@
     -fx-font-family: "Arial";
     -fx-text-fill: white;
 }
+
+.game-combo {
+    -fx-font-size: 14px;
+    -fx-pref-width: 180px;
+    -fx-background-color: #8BC34A;
+    -fx-text-fill: white;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.game-combo .list-cell {
+    -fx-background-color: #8BC34A;
+    -fx-text-fill: white;
+}
+
+.game-combo .list-view {
+    -fx-background-color: #8BC34A;
+}
