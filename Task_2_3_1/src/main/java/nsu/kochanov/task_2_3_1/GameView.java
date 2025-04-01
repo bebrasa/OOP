@@ -23,8 +23,6 @@ public class GameView {
 
     /**
      * Creates new GameView with specified canvas.
-     *
-     * @param canvas Canvas to draw game elements on
      */
     public GameView(Canvas canvas) {
         this.gc = canvas.getGraphicsContext2D();

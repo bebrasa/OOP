@@ -22,13 +22,15 @@ public class SnakeGame {
 
     private static final Image[] FOODS_IMAGE = new Image[] {
             new Image(Objects.requireNonNull(
-                            SnakeGame.class.getResource(
-                                    "/nsu/kochanov/task_2_3_1/img/ic_orange.png"))
-                    .toExternalForm()),
+                    SnakeGame.class.getResource(
+                            "/nsu/kochanov/task_2_3_1/img/ic_orange.png"
+                    )
+            ).toExternalForm()),
             new Image(Objects.requireNonNull(
-                            SnakeGame.class.getResource(
-                                    "/nsu/kochanov/task_2_3_1/img/ic_apple.png"))
-                    .toExternalForm())
+                    SnakeGame.class.getResource(
+                            "/nsu/kochanov/task_2_3_1/img/ic_apple.png"
+                    )
+            ).toExternalForm())
     };
 
     private final List<Point> snakeBody = new ArrayList<>();
@@ -252,16 +254,13 @@ public class SnakeGame {
                     level++;
                     speed = Math.max(50, speed - 20);
                 }
-            }
-            else if (bot1Head.equals(food)) {
+            } else if (bot1Head.equals(food)) {
                 bot1.getBody().add(new Point(-1, -1));
                 eaten = true;
-            }
-            else if (bot2Head.equals(food)) {
+            } else if (bot2Head.equals(food)) {
                 bot2.getBody().add(new Point(-1, -1));
                 eaten = true;
             }
-
             if (eaten) {
                 foodToRemove.add(i);
             }

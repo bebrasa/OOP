@@ -2,11 +2,17 @@ package nsu.kochanov.task_2_3_1;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * javadoc.
+ */
 public class Main extends Application {
+    /**
+     * javadoc.
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().
@@ -21,6 +27,9 @@ public class Main extends Application {
         controller.setScene(primaryStage);
     }
 
+    /**
+     * javadoc.
+     */
     public static void main(String[] args) {
         launch(args);
     }
