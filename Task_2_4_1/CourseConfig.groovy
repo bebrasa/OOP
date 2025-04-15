@@ -9,7 +9,7 @@ course.task(new Task(
         hardDeadline: LocalDate.parse("2025-04-20")
 ))
 
-def group = new Group(name: "Группа 1")
+def group = new Group(name: "Группа 23215")
 group.student(new Student(
         githubUsername: "bebrasa",
         fullName: "Кочанов Никита",
