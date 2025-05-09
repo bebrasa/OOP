@@ -1,0 +1,44 @@
+plugins {
+    id 'java'
+    id 'jacoco'
+    id 'application'
+    id 'groovy'
+}
+
+group = 'nsu.kochanov'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    implementation 'org.codehaus.groovy:groovy-all:3.0.17'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java']
+        }
+        resources {
+            srcDirs = ['src/main/resources']
+        }
+    }
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+    }
+}
+
+application {
+    mainClass = 'nsu.kochanov.Main'
+}
