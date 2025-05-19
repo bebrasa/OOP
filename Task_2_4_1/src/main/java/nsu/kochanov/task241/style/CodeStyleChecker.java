@@ -3,7 +3,6 @@ package nsu.kochanov.task241.style;
 import com.google.googlejavaformat.java.Formatter;
 import com.google.googlejavaformat.java.FormatterException;
 import com.google.googlejavaformat.java.JavaFormatterOptions;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -42,7 +41,8 @@ public class CodeStyleChecker {
                             String source = Files.readString(path);
                             formatter.formatSource(source);
                         } catch (FormatterException | IOException e) {
-                            errors.add("Ошибка форматирования в файле " + path + ": " + e.getMessage());
+                            errors.add("Ошибка форматирования в файле "
+                                    + path + ": " + e.getMessage());
                         }
                     });
         } catch (IOException e) {

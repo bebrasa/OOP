@@ -93,7 +93,8 @@ public class TaskRunner {
                     List<String> styleErrors = styleChecker.checkDirectory(taskDir);
 
                     // Запуск тестов в отдельном процессе
-                    TestRunner.TestResults testResults = runTestsInSeparateProcess(taskDir, task.name);
+                    TestRunner.TestResults testResults =
+                            runTestsInSeparateProcess(taskDir, task.name);
 
                     // Расчет баллов
                     double score = calculateScore(task, testResults, styleErrors, compilationSuccess);
@@ -168,7 +169,8 @@ public class TaskRunner {
                     .filter(path -> Files.isDirectory(path))
                     .filter(path -> {
                         try {
-                            return Files.list(path).anyMatch(p -> p.toString().endsWith("Test.java"));
+                            return Files.list(path).anyMatch(p ->
+                                    p.toString().endsWith("Test.java"));
                         } catch (IOException e) {
                             return false;
                         }

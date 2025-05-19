@@ -113,12 +113,12 @@ class TaskRunnerTest {
      */
     @Test
     void testAddAndUpdateTaskInConfig() {
-        CourseConfig testConfig = new CourseConfig();
         
         // Добавляем задачу
         Task task = new Task();
         task.id = "task1";
         task.name = "Task 1";
+        CourseConfig testConfig = new CourseConfig();
         task.maxScore = 5;
         testConfig.task(task);
         
@@ -176,8 +176,6 @@ class TaskRunnerTest {
     
     /**
      * Проверяет создание структуры проекта во временной директории.
-     * 
-     * @throws IOException если возникают проблемы при создании файлов
      */
     @Test
     void testCreateProjectStructure() throws IOException {

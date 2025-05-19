@@ -33,7 +33,8 @@ public class JavaCompiler {
             boolean allCompiled = true;
             for (Path gradleFile : gradleFiles) {
                 File projectDir = gradleFile.getParent().toFile();
-                System.out.println("Компиляция проекта в директории: " + projectDir.getAbsolutePath());
+                System.out.println("Компиляция проекта в директории: "
+                        + projectDir.getAbsolutePath());
 
                 ProcessBuilder processBuilder = new ProcessBuilder();
                 processBuilder.directory(projectDir);
@@ -55,7 +56,8 @@ public class JavaCompiler {
                     if (errorFile.exists()) {
                         String errors = new String(Files.readAllBytes(errorFile.toPath()));
                         System.err.println(
-                                "Ошибки компиляции в " + projectDir.getAbsolutePath() + ":\n" + errors);
+                                "Ошибки компиляции в "
+                                        + projectDir.getAbsolutePath() + ":\n" + errors);
                     }
                 }
 

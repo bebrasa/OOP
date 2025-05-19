@@ -1,7 +1,6 @@
 package nsu.kochanov.task241.report;
 
 import java.util.List;
-
 import nsu.kochanov.task241.model.CourseConfig;
 import nsu.kochanov.task241.test.TestRunner.TestResults;
 import org.jsoup.Jsoup;

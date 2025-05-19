@@ -2,16 +2,16 @@ package nsu.kochanov.task241;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 
 import nsu.kochanov.task241.config.ConfigurationLoader;
 import nsu.kochanov.task241.model.CourseConfig;
@@ -112,8 +112,7 @@ class MainTest {
     
     /**
      * Проверяет правильную обработку пути к конфигурационному файлу.
-     * 
-     * @throws IOException если возникает ошибка при создании временного файла
+     *
      */
     @Test
     void testConfigFilePath() throws IOException {
