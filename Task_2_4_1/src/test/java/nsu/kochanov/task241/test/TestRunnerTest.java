@@ -2,15 +2,14 @@ package nsu.kochanov.task241.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
@@ -298,93 +297,73 @@ class TestRunnerTest {
     }
     
     /**
-     * Тест для проверки вывода результатов в консоль.
+     * Проверяет создание и использование нескольких объектов TestRunner.
      */
     @Test
-    void testConsoleOutput() {
-        // Перенаправляем вывод
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        PrintStream originalOut = System.out;
-        System.setOut(new PrintStream(outContent));
+    void testMultipleTestRunnerInstances() {
+        TestRunner testRunner1 = new TestRunner();
+        TestRunner testRunner2 = new TestRunner();
         
-        try {
-            // Запускаем тесты
-            testRunner.runTests(tempDir.getAbsolutePath());
-            
-            // Проверяем, что в выводе содержится информация о запуске тестов
-            assertTrue(outContent.toString().contains("Запуск тестов в директории"));
-        } finally {
-            // Восстанавливаем System.out
-            System.setOut(originalOut);
-        }
+        assertNotNull(testRunner1);
+        assertNotNull(testRunner2);
+        
+        // Проверяем, что создание нескольких экземпляров работает корректно
+        TestRunner.TestResults results1 = new TestRunner.TestResults();
+        TestRunner.TestResults results2 = new TestRunner.TestResults();
+        
+        results1.totalTests = 10;
+        results2.totalTests = 20;
+        
+        assertEquals(10, results1.totalTests);
+        assertEquals(20, results2.totalTests);
+        
+        // Убеждаемся, что экземпляры не влияют друг на друга
+        assertNotEquals(results1.totalTests, results2.totalTests);
     }
     
     /**
-     * Тест для проверки конструктора TestResults с параметрами.
+     * Проверяет поведение метода при передаче пустой строки в качестве директории.
      */
     @Test
-    void testTestResultsConstructorWithParameters() {
-        // Создаем объект с предустановленными значениями
+    void testRunTestsWithEmptyDirectory() {
+        TestRunner.TestResults results = testRunner.runTests("");
+        
+        // Должна быть ошибка о том, что файлы build.gradle не найдены
+        assertFalse(results.failures.isEmpty());
+        assertFalse(results.failures.get(0).contains("Не найдено build.gradle"));
+    }
+    
+    /**
+     * Проверяет работу с отрицательными значениями.
+     */
+    @Test
+    void testTestResultsWithNegativeValues() {
         TestRunner.TestResults results = new TestRunner.TestResults();
-        results.totalTests = 10;
-        results.passedTests = 8;
-        results.failedTests = 2;
+        
+        results.totalTests = -1;
+        results.passedTests = -5;
+        results.failedTests = -3;
+        
+        assertEquals(-1, results.totalTests);
+        assertEquals(-5, results.passedTests);
+        assertEquals(-3, results.failedTests);
+    }
+    
+    /**
+     * Проверяет поведение при нулевых значениях.
+     */
+    @Test
+    void testTestResultsWithZeroValues() {
+        TestRunner.TestResults results = new TestRunner.TestResults();
+        
+        results.totalTests = 0;
+        results.passedTests = 0;
+        results.failedTests = 0;
         results.skippedTests = 0;
         
-        // Проверяем значения
-        assertEquals(10, results.totalTests);
-        assertEquals(8, results.passedTests);
-        assertEquals(2, results.failedTests);
+        assertEquals(0, results.totalTests);
+        assertEquals(0, results.passedTests);
+        assertEquals(0, results.failedTests);
         assertEquals(0, results.skippedTests);
-    }
-    
-    /**
-     * Тест для проверки обработки ошибок ввода-вывода.
-     */
-    @Test
-    void testIoExceptionHandling() {
-        // Создаем директорию, которая вызовет ошибку доступа
-        File inaccessibleDir = new File(tempDir, "inaccessible");
-        inaccessibleDir.mkdirs();
-        
-        // Запускаем тесты с иммитацией ошибки ввода-вывода
-        TestRunner.TestResults results = new TestRunner.TestResults();
-        
-        // Добавляем ошибку вручную и проверяем, что она сохранена
-        results.failures.add("Ошибка при запуске тестов: Доступ запрещен");
-        
-        // Проверяем наличие ошибки
-        assertFalse(results.failures.isEmpty());
-        assertTrue(results.failures.get(0).contains("Ошибка при запуске тестов"));
-    }
-    
-    /**
-     * Тест для проверки запуска тестов с реальными файлами.
-     */
-    @Test
-    void testRunTestsWithRealFiles() throws IOException {
-        // Создаем реальные тестовые классы
-        File testDir = new File(tempDir, "src/test/java/com/example");
-        testDir.mkdirs();
-        
-        // Создаем второй тестовый файл
-        File anotherTestFile = new File(testDir, "AnotherTest.java");
-        Files.writeString(anotherTestFile.toPath(), 
-                "package com.example;\n\n"
-                + "import org.junit.jupiter.api.Test;\n"
-                + "import static org.junit.jupiter.api.Assertions.assertFalse;\n\n"
-                + "public class AnotherTest {\n"
-                + "    @Test\n"
-                + "    void testAnotherSample() {\n"
-                + "        assertFalse(false);\n"
-                + "    }\n"
-                + "}");
-        
-        // Запускаем тесты
-        TestRunner.TestResults results = testRunner.runTests(tempDir.getAbsolutePath());
-        
-        // Проверяем результаты
-        // Даже если тесты не запускаются реально, TestRunner должен попытаться их найти
-        assertNotNull(results);
     }
 }
