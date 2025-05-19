@@ -1,4 +1,4 @@
-import nsu.kochanov.task_2_4_1.model.*
+import nsu.kochanov.task241.model.*
 import java.time.LocalDate
 
 // Определение задач
