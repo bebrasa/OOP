@@ -6,11 +6,9 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Класс для компиляции Java-проектов с использованием Gradle.
- */
+/** Класс для компиляции Java-проектов с использованием Gradle. */
 public class JavaCompiler {
-  
+
   /**
    * Компилирует Java-проект в указанной директории.
    *
@@ -38,7 +36,7 @@ public class JavaCompiler {
         ProcessBuilder processBuilder = new ProcessBuilder();
         processBuilder.directory(projectDir);
         processBuilder.command("./gradlew", "clean", "compileJava");
-        
+
         // Перенаправляем вывод в файлы
         File outputFile = new File(projectDir, "compile-output.txt");
         File errorFile = new File(projectDir, "compile-error.txt");
@@ -54,7 +52,8 @@ public class JavaCompiler {
           // Читаем ошибки компиляции
           if (errorFile.exists()) {
             String errors = new String(Files.readAllBytes(errorFile.toPath()));
-            System.err.println("Ошибки компиляции в " + projectDir.getAbsolutePath() + ":\n" + errors);
+            System.err.println(
+                "Ошибки компиляции в " + projectDir.getAbsolutePath() + ":\n" + errors);
           }
         }
 

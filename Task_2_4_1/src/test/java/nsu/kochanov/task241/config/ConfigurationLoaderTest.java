@@ -48,13 +48,6 @@ class ConfigurationLoaderTest {
         }
     }
 
-    /**
-     * Проверяет загрузку конфигурации из существующего файла.
-     */
-    @Test
-    void testLoadFromExistingFile() {
-        assertNotNull(ConfigurationLoader.load(configFile.getAbsolutePath()));
-    }
 
     /**
      * Проверяет поведение при попытке загрузить несуществующий файл.

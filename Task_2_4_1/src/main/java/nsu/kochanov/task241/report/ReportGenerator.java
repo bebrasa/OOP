@@ -7,11 +7,9 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
-/**
- * Класс для генерации отчетов о проверке заданий.
- */
+/** Класс для генерации отчетов о проверке заданий. */
 public class ReportGenerator {
-  
+
   /**
    * Генерирует отчет о проверке задания студента.
    *
@@ -24,15 +22,15 @@ public class ReportGenerator {
    * @param score итоговый балл
    */
   public void generateReport(
-          CourseConfig config, 
-          String studentName, 
-          String taskId,
-          boolean compilationSuccess, 
-          List<String> styleErrors,
-          TestResults testResults, 
-          double score) {
+      CourseConfig config,
+      String studentName,
+      String taskId,
+      boolean compilationSuccess,
+      List<String> styleErrors,
+      TestResults testResults,
+      double score) {
     StringBuilder report = new StringBuilder();
-    
+
     // Заголовок
     report.append("\n=== Отчет по проверке задания ===\n\n");
     report.append("Студент: ").append(studentName).append("\n");
@@ -75,4 +73,4 @@ public class ReportGenerator {
 
     System.out.println(report.toString());
   }
-} 
+}
