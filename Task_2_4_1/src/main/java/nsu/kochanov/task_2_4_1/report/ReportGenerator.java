@@ -23,9 +23,14 @@ public class ReportGenerator {
    * @param testResults результаты тестирования
    * @param score итоговый балл
    */
-  public void generateReport(CourseConfig config, String studentName, String taskId,
-                           boolean compilationSuccess, List<String> styleErrors,
-                           TestResults testResults, double score) {
+  public void generateReport(
+          CourseConfig config, 
+          String studentName, 
+          String taskId,
+          boolean compilationSuccess, 
+          List<String> styleErrors,
+          TestResults testResults, 
+          double score) {
     StringBuilder report = new StringBuilder();
     
     // Заголовок

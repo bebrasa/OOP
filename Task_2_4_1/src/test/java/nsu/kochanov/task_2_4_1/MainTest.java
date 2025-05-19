@@ -13,24 +13,24 @@ import org.junit.jupiter.api.Test;
  */
 class MainTest {
 
-  /**
-   * Проверяет, что класс Main можно инстанцировать.
-   */
-  @Test
-  void testMainClassCanBeInstantiated() {
-    Main main = new Main();
-    assertNotNull(main);
-  }
-  
-  /**
-   * Тест проверяет, что CourseConfig не null.
-   */
-  @Test
-  void testCourseConfigNotNull() {
-    CourseConfig config = new CourseConfig();
-    assertNotNull(config);
-    assertNotNull(config.tasks);
-    assertNotNull(config.groups);
-    assertNotNull(config.checkpoints);
-  }
+    /**
+     * Проверяет, что класс Main можно инстанцировать.
+     */
+    @Test
+    void testMainClassCanBeInstantiated() {
+        Main main = new Main();
+        assertNotNull(main);
+    }
+    
+    /**
+     * Тест проверяет, что CourseConfig не null.
+     */
+    @Test
+    void testCourseConfigNotNull() {
+        CourseConfig config = new CourseConfig();
+        assertNotNull(config);
+        assertNotNull(config.tasks);
+        assertNotNull(config.groups);
+        assertNotNull(config.checkpoints);
+    }
 }

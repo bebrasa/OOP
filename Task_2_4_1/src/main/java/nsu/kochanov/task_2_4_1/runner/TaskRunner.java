@@ -51,14 +51,15 @@ public class TaskRunner {
                 
                 // Проверяем успешность клонирования/обновления репозитория
                 if (!GitManager.cloneOrPull(student.repoUrl, localPath)) {
-                    System.err.println("Не удалось получить репозиторий для студента: " + student.fullName);
+                    System.err.println("Не удалось получить репозиторий для студента: " 
+                            + student.fullName);
                     continue;
                 }
 
                 // Берем только первые три задачи
                 List<Task> tasksToCheck = config.tasks.stream()
-                    .limit(3)
-                    .collect(Collectors.toList());
+                        .limit(3)
+                        .collect(Collectors.toList());
 
                 for (Task task : tasksToCheck) {
                     System.out.println("\nПроверка задания: " + task.name);
@@ -73,11 +74,18 @@ public class TaskRunner {
                     // Компиляция
                     boolean compilationSuccess = compiler.compile(taskDir);
                     if (!compilationSuccess) {
-                        System.err.println("Ошибка компиляции для студента: " + student.fullName + ", задание: " + task.name);
+                        System.err.println("Ошибка компиляции для студента: " 
+                                + student.fullName + ", задание: " + task.name);
                         TestRunner.TestResults emptyResults = new TestRunner.TestResults();
                         emptyResults.failures.add("Ошибка компиляции");
-                        reportGenerator.generateReport(config, student.fullName, task.id,
-                                false, List.of("Ошибка компиляции"), emptyResults, 0);
+                        reportGenerator.generateReport(
+                                config, 
+                                student.fullName, 
+                                task.id,
+                                false, 
+                                List.of("Ошибка компиляции"), 
+                                emptyResults, 
+                                0);
                         continue;
                     }
 
@@ -91,8 +99,14 @@ public class TaskRunner {
                     double score = calculateScore(task, testResults, styleErrors, compilationSuccess);
 
                     // Генерация отчета
-                    reportGenerator.generateReport(config, student.fullName, task.id,
-                            compilationSuccess, styleErrors, testResults, score);
+                    reportGenerator.generateReport(
+                            config, 
+                            student.fullName, 
+                            task.id,
+                            compilationSuccess, 
+                            styleErrors, 
+                            testResults, 
+                            score);
                 }
             }
         }
@@ -109,26 +123,26 @@ public class TaskRunner {
         try {
             // Сначала пробуем найти по ID задачи
             String result = Files.walk(Path.of(localPath))
-                .filter(path -> path.toString().contains(taskId))
-                .filter(Files::isDirectory)
-                .findFirst()
-                .map(Path::toString)
-                .orElse(null);
+                    .filter(path -> path.toString().contains(taskId))
+                    .filter(Files::isDirectory)
+                    .findFirst()
+                    .map(Path::toString)
+                    .orElse(null);
 
             // Если не нашли по ID, пробуем найти по номеру задачи
             if (result == null) {
                 String taskNumber = taskId.replace("lab", "");
                 result = Files.walk(Path.of(localPath))
-                    .filter(path -> {
-                        String pathStr = path.toString();
-                        // Ищем директории, содержащие номер задачи
-                        return pathStr.contains("Task_") && 
-                               pathStr.contains("_" + taskNumber + "_") &&
-                               Files.isDirectory(path);
-                    })
-                    .findFirst()
-                    .map(Path::toString)
-                    .orElse(null);
+                        .filter(path -> {
+                            String pathStr = path.toString();
+                            // Ищем директории, содержащие номер задачи
+                            return pathStr.contains("Task_") 
+                                    && pathStr.contains("_" + taskNumber + "_")
+                                    && Files.isDirectory(path);
+                        })
+                        .findFirst()
+                        .map(Path::toString)
+                        .orElse(null);
             }
 
             return result;
@@ -150,61 +164,66 @@ public class TaskRunner {
         try {
             // Ищем все директории с тестами
             Files.walk(Path.of(localPath))
-                .filter(path -> path.toString().contains("/src/test/java/"))
-                .filter(path -> Files.isDirectory(path))
-                .filter(path -> {
-                    try {
-                        return Files.list(path).anyMatch(p -> p.toString().endsWith("Test.java"));
-                    } catch (IOException e) {
-                        return false;
-                    }
-                })
-                .forEach(testDir -> {
-                    try {
-                        // Находим корневую директорию проекта (где находится build.gradle)
-                        Path projectRoot = findProjectRoot(testDir);
-                        if (projectRoot == null) {
-                            results.failures.add("Не найден build.gradle в директории: " + testDir);
-                            return;
+                    .filter(path -> path.toString().contains("/src/test/java/"))
+                    .filter(path -> Files.isDirectory(path))
+                    .filter(path -> {
+                        try {
+                            return Files.list(path).anyMatch(p -> p.toString().endsWith("Test.java"));
+                        } catch (IOException e) {
+                            return false;
                         }
+                    })
+                    .forEach(testDir -> {
+                        try {
+                            // Находим корневую директорию проекта (где находится build.gradle)
+                            Path projectRoot = findProjectRoot(testDir);
+                            if (projectRoot == null) {
+                                results.failures.add("Не найден build.gradle в директории: " 
+                                        + testDir);
+                                return;
+                            }
 
-                        // Считаем количество тестовых классов
-                        results.totalTests = (int) Files.walk(testDir)
-                            .filter(path -> path.toString().endsWith("Test.java"))
-                            .count();
+                            // Считаем количество тестовых классов
+                            results.totalTests = (int) Files.walk(testDir)
+                                    .filter(path -> path.toString().endsWith("Test.java"))
+                                    .count();
 
-                        // Запускаем тесты в корневой директории проекта
-                        ProcessBuilder processBuilder = new ProcessBuilder();
-                        processBuilder.directory(projectRoot.toFile());
-                        
-                        // Используем Gradle для запуска тестов с минимальным выводом
-                        processBuilder.command("./gradlew", "test", 
-                            "--tests", "*",
-                            "--console=plain",
-                            "--info");
-                        
-                        // Перенаправляем вывод в файлы
-                        File outputFile = new File(projectRoot.toString(), "test-output.txt");
-                        File errorFile = new File(projectRoot.toString(), "test-error.txt");
-                        processBuilder.redirectOutput(outputFile);
-                        processBuilder.redirectError(errorFile);
+                            // Запускаем тесты в корневой директории проекта
+                            ProcessBuilder processBuilder = new ProcessBuilder();
+                            processBuilder.directory(projectRoot.toFile());
+                            
+                            // Используем Gradle для запуска тестов с минимальным выводом
+                            processBuilder.command(
+                                    "./gradlew", 
+                                    "test", 
+                                    "--tests", 
+                                    "*",
+                                    "--console=plain",
+                                    "--info");
+                            
+                            // Перенаправляем вывод в файлы
+                            File outputFile = new File(projectRoot.toString(), "test-output.txt");
+                            File errorFile = new File(projectRoot.toString(), "test-error.txt");
+                            processBuilder.redirectOutput(outputFile);
+                            processBuilder.redirectError(errorFile);
 
-                        Process process = processBuilder.start();
-                        int exitCode = process.waitFor();
+                            Process process = processBuilder.start();
+                            int exitCode = process.waitFor();
 
-                        // Если сборка успешна, считаем все тесты пройденными
-                        if (exitCode == 0) {
-                            results.passedTests = results.totalTests;
+                            // Если сборка успешна, считаем все тесты пройденными
+                            if (exitCode == 0) {
+                                results.passedTests = results.totalTests;
+                            }
+
+                            // Очищаем временные файлы
+                            outputFile.delete();
+                            errorFile.delete();
+                        } catch (IOException | InterruptedException e) {
+                            e.printStackTrace();
+                            results.failures.add("Ошибка при запуске тестов в " + testDir 
+                                    + ": " + e.getMessage());
                         }
-
-                        // Очищаем временные файлы
-                        outputFile.delete();
-                        errorFile.delete();
-                    } catch (IOException | InterruptedException e) {
-                        e.printStackTrace();
-                        results.failures.add("Ошибка при запуске тестов в " + testDir + ": " + e.getMessage());
-                    }
-                });
+                    });
             
             return results;
         } catch (IOException e) {
@@ -256,8 +275,11 @@ public class TaskRunner {
      * @param compilationSuccess успешность компиляции
      * @return балл за задание
      */
-    private double calculateScore(Task task, TestRunner.TestResults testResults,
-                                  List<String> styleErrors, boolean compilationSuccess) {
+    private double calculateScore(
+            Task task, 
+            TestRunner.TestResults testResults,
+            List<String> styleErrors, 
+            boolean compilationSuccess) {
         if (!compilationSuccess) {
             return 0;
         }

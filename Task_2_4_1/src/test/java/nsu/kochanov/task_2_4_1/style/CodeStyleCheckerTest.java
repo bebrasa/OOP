@@ -17,62 +17,63 @@ import org.junit.jupiter.api.io.TempDir;
  */
 class CodeStyleCheckerTest {
 
-  @TempDir
-  private File tempDir;
+    @TempDir
+    private File tempDir;
 
-  /**
-   * Тестирует создание объекта CodeStyleChecker.
-   */
-  @Test
-  void testCodeStyleCheckerCreation() {
-    CodeStyleChecker checker = new CodeStyleChecker();
-    assertNotNull(checker);
-  }
+    /**
+     * Тестирует создание объекта CodeStyleChecker.
+     */
+    @Test
+    void testCodeStyleCheckerCreation() {
+        CodeStyleChecker checker = new CodeStyleChecker();
+        assertNotNull(checker);
+    }
 
-  /**
-   * Тестирует проверку пустой директории.
-   */
-  @Test
-  void testCheckEmptyDirectory() {
-    CodeStyleChecker checker = new CodeStyleChecker();
-    List<String> errors = checker.checkDirectory(tempDir.getAbsolutePath());
-    assertNotNull(errors);
-    assertTrue(errors.isEmpty());
-  }
+    /**
+     * Тестирует проверку пустой директории.
+     */
+    @Test
+    void testCheckEmptyDirectory() {
+        CodeStyleChecker checker = new CodeStyleChecker();
+        List<String> errors = checker.checkDirectory(tempDir.getAbsolutePath());
+        assertNotNull(errors);
+        assertTrue(errors.isEmpty());
+    }
 
-  /**
-   * Тестирует проверку директории с корректным Java файлом.
-   * @throws IOException при ошибке создания тестового файла
-   */
-  @Test
-  void testCheckDirectoryWithValidJavaFile() throws IOException {
-    // Создаем корректный Java файл
-    Path javaFile = tempDir.toPath().resolve("Test.java");
-    String content = "package test;\n\n"
-        + "public class Test {\n"
-        + "  public static void main(String[] args) {\n"
-        + "    System.out.println(\"Hello, World!\");\n"
-        + "  }\n"
-        + "}\n";
-    Files.writeString(javaFile, content);
+    /**
+     * Тестирует проверку директории с корректным Java файлом.
+     *
+     * @throws IOException при ошибке создания тестового файла
+     */
+    @Test
+    void testCheckDirectoryWithValidJavaFile() throws IOException {
+        // Создаем корректный Java файл
+        Path javaFile = tempDir.toPath().resolve("Test.java");
+        String content = "package test;\n\n"
+                + "public class Test {\n"
+                + "    public static void main(String[] args) {\n"
+                + "        System.out.println(\"Hello, World!\");\n"
+                + "    }\n"
+                + "}\n";
+        Files.writeString(javaFile, content);
 
-    CodeStyleChecker checker = new CodeStyleChecker();
-    List<String> errors = checker.checkDirectory(tempDir.getAbsolutePath());
-    
-    // Проверяем, что ошибок нет
-    assertTrue(errors.isEmpty());
-  }
+        CodeStyleChecker checker = new CodeStyleChecker();
+        List<String> errors = checker.checkDirectory(tempDir.getAbsolutePath());
+        
+        // Проверяем, что ошибок нет
+        assertTrue(errors.isEmpty());
+    }
 
-  /**
-   * Тестирует поведение при несуществующей директории.
-   */
-  @Test
-  void testCheckNonExistingDirectory() {
-    CodeStyleChecker checker = new CodeStyleChecker();
-    List<String> errors = checker.checkDirectory("/non/existing/directory");
-    
-    assertNotNull(errors);
-    assertEquals(1, errors.size());
-    assertTrue(errors.get(0).contains("Ошибка при проверке стиля кода"));
-  }
+    /**
+     * Тестирует поведение при несуществующей директории.
+     */
+    @Test
+    void testCheckNonExistingDirectory() {
+        CodeStyleChecker checker = new CodeStyleChecker();
+        List<String> errors = checker.checkDirectory("/non/existing/directory");
+        
+        assertNotNull(errors);
+        assertEquals(1, errors.size());
+        assertTrue(errors.get(0).contains("Ошибка при проверке стиля кода"));
+    }
 }
