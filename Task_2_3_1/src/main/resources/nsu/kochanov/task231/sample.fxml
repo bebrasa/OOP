@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ComboBox?>
+
+<VBox alignment="CENTER" xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="nsu.kochanov.task231.GameController"
+      stylesheets="@styles.css">
+
+    <!-- Верхняя панель с кнопками -->
+    <VBox style="-fx-background-color: #AAD751; -fx-padding: 10;" spacing="10" alignment="CENTER">
+        <HBox spacing="20" alignment="CENTER">
+            <Button text="Старт" onAction="#handleStart" styleClass="game-button"/>
+            <Button text="Стоп" onAction="#handleStop" styleClass="game-button"/>
+            <Button text="Рестарт" onAction="#handleRestart" styleClass="game-button"/>
+            <ComboBox fx:id="musicComboBox" promptText="Выберите музыку" styleClass="game-combo"/>
+        </HBox>
+
+        <HBox spacing="30" alignment="CENTER">
+            <Label fx:id="scoreLabel" text="Score: 0" styleClass="game-score"/>
+            <Label fx:id="levelLabel" text="Level: 1" styleClass="game-level"/>
+        </HBox>
+    </VBox>
+
+    <!-- Разделительная линия -->
+    <Line endX="800" stroke="black" strokeWidth="2"/>
+
+    <!-- Игровое поле -->
+    <Canvas fx:id="gameCanvas" width="800" height="800"/>
+</VBox>
