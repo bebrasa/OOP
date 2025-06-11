@@ -1,7 +1,6 @@
 package ru.nsu.kochanov;
 
 import java.io.InputStream;
-import java.util.*;
 
 /**
  * Этот класс используется для хранения графа,

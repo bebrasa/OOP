@@ -31,8 +31,8 @@ class AdjacencyMatrixGraphTest {
         graph.addEdge(1, 2);
 
         // Ожидаемое строковое представление после добавления рёбер
-        String expectedGraphWithEdges = "0 1 0 0 0 \n0 0 1 0 0"
-                + " \n0 0 0 0 0 \n0 0 0 0 0 \n0 0 0 0 0 \n";
+        String expectedGraphWithEdges = "0 1 0 0 0"
+                + " \n0 0 1 0 0 \n0 0 0 0 0 \n0 0 0 0 0 \n0 0 0 0 0 \n";
         assertEquals(expectedGraphWithEdges, graph.toString(), "Строковое представление графа "
                 + "с рёбрами некорректно");
     }
